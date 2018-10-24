@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="practise|小程序|小白," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Welcome to T-SPACE~本文将介绍小程序的小白入手，从小程序的申请到小程序的开发，一起入门！">
+<meta name="keywords" content="practise|小程序|小白">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从0开始的小程序之旅">
+<meta property="og:url" content="http://tigutf.github.io/2018/10/18/从0开始小程序之旅/index.html">
+<meta property="og:site_name" content="T-SPACE">
+<meta property="og:description" content="Welcome to T-SPACE~本文将介绍小程序的小白入手，从小程序的申请到小程序的开发，一起入门！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/yUH2STN.png">
+<meta property="og:image" content="https://i.imgur.com/cLt5aLE.png">
+<meta property="og:updated_time" content="2018-10-24T17:37:44.805Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从0开始的小程序之旅">
+<meta name="twitter:description" content="Welcome to T-SPACE~本文将介绍小程序的小白入手，从小程序的申请到小程序的开发，一起入门！">
+<meta name="twitter:image" content="https://i.imgur.com/yUH2STN.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://tigutf.github.io/2018/10/18/从0开始小程序之旅/"/>
+
+
+
+
+
+  <title>从0开始的小程序之旅 | T-SPACE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">T-SPACE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tigutf.github.io/2018/10/18/从0开始小程序之旅/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tigutf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="T-SPACE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从0开始的小程序之旅</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-18T22:49:48+08:00">
+                2018-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微信小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">微信小程序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Welcome to T-SPACE~<br>本文将介绍小程序的小白入手，从小程序的申请到小程序的开发，一起入门！</p>
+<a id="more"></a> 
+<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><p><img src="https://i.imgur.com/yUH2STN.png" alt=""></p>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html?t=18092022" target="_blank" rel="noopener">开发者工具</a></p>
+<ol>
+<li>微信的开发者工具需要微信扫描登陆后才能打开。</li>
+<li>新建项目选择小程序项目，选择代码存放的硬盘路径，填入刚刚申请到的小程序的 AppID，给你的项目起个名字，最后，勾选 “创建 QuickStart 项目” （注意: 你要选择一个空的目录才会有这个选项），点击确定，你就得到了你的第一个小程序了。</li>
+<li>点击工具上的编译按钮，可以在工具的左侧模拟器界面看到这个小程序的表现，也可以点击预览按钮，通过微信的扫一扫在手机上体验你的第一个小程序。</li>
+</ol>
+<h3 id="小程序结构"><a href="#小程序结构" class="headerlink" title="小程序结构"></a>小程序结构</h3><p><img src="https://i.imgur.com/cLt5aLE.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- pages --&gt; 小程序所有页面存放的文件夹</span><br><span class="line">- libs  --&gt; 引进的js库</span><br><span class="line">- img   --&gt; 图片文件夹</span><br><span class="line"><span class="number">1.</span> app.json // 后缀的 JSON 配置文件</span><br><span class="line"><span class="number">2.</span> app.wxml // 后缀的 WXML 模板文件</span><br><span class="line"><span class="number">3.</span> app.wxss // 后缀的 WXSS 样式文件</span><br><span class="line"><span class="number">4.</span> app.js   // 后缀的 JS 脚本逻辑文件</span><br></pre></td></tr></table></figure>
+<h4 id="小程序配置-app-json"><a href="#小程序配置-app-json" class="headerlink" title="小程序配置 app.json"></a>小程序配置 app.json</h4><p>app.json 是当前小程序的全局配置，包括了小程序的所有页面路径、界面表现、网络超时时间、底部 tab 等。QuickStart 项目里边的 app.json 配置内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&amp;#123;</span><br><span class="line">  &quot;pages&quot;:[</span><br><span class="line">    &quot;pages/index/index&quot;,</span><br><span class="line">    &quot;pages/logs/logs&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;window&quot;:&amp;#123;</span><br><span class="line">    &quot;backgroundTextStyle&quot;:&quot;light&quot;,</span><br><span class="line">    &quot;navigationBarBackgroundColor&quot;: &quot;#fff&quot;,</span><br><span class="line">    &quot;navigationBarTitleText&quot;: &quot;WeChat&quot;,</span><br><span class="line">    &quot;navigationBarTextStyle&quot;:&quot;black&quot;</span><br><span class="line">  &amp;#125;</span><br><span class="line">&amp;#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们简单说一下这个配置各个项的含义:</p>
+<ul>
+<li>pages字段 —— 用于描述当前小程序所有页面路径，这是为了让微信客户端知道当前你的小程序页面定义在哪个目录。</li>
+<li>window字段 —— 定义小程序所有页面的顶部背景颜色，文字颜色定义等。<br>其他配置项细节可以参考<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/config.html" target="_blank" rel="noopener">小程序的配置 app.json</a>。</li>
+</ul>
+<h4 id="工具配置-project-config-json"><a href="#工具配置-project-config-json" class="headerlink" title="工具配置 project.config.json"></a>工具配置 project.config.json</h4><p>通常大家在使用一个工具的时候，都会针对各自喜好做一些个性化配置，例如界面颜色、编译配置等等，当你换了另外一台电脑重新安装工具的时候，你还要重新配置。<br>考虑到这点，小程序开发者工具在每个项目的根目录都会生成一个 project.config.json，你在工具上做的任何配置都会写入到这个文件，当你重新安装工具或者换电脑工作时，你只要载入同一个项目的代码包，开发者工具就自动会帮你恢复到当时你开发项目时的个性化配置，其中会包括编辑器的颜色、代码上传时自动压缩等等一系列选项。</p>
+<h4 id="页面配置-page-json"><a href="#页面配置-page-json" class="headerlink" title="页面配置 page.json"></a>页面配置 page.json</h4><p>与上面的app.json类似，但是是针对具体某一个页面的，让开发者可以独立定义每个页面的一些属性。</p>
+<h4 id="WXML-模板"><a href="#WXML-模板" class="headerlink" title="WXML 模板"></a>WXML 模板</h4><ol>
+<li>编写网页时我们经常都是采用HTML+CSS+JS的组合，而WXML就相当于html，用来描述当前这个页面的结构。</li>
+<li>在网页的一般开发流程中，我们通常会通过 JS 操作 DOM (对应 HTML 的描述产生的树)，以引起界面的一些变化响应用户的行为。例如，用户点击某个按钮的时候，JS 会记录一些状态到 JS 变量里边，同时通过 DOM API 操控 DOM 的属性或者行为，进而引起界面一些变化。当项目越来越大的时候，你的代码会充斥着非常多的界面交互逻辑和程序的各种状态变量，显然这不是一个很好的开发模式，因此就有了 MVVM 的开发模式（例如 React, Vue），提倡把渲染和逻辑分离。简单来说就是不要再让 JS 直接操控 DOM，JS 只需要管理状态即可，然后再通过一种模板语法来描述状态和界面结构的关系即可。<br>小程序的框架也是用到了这个思路，如果你需要把一个 Hello World 的字符串显示在界面上。<br>WXML 是这么写 :<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;text&gt;&amp;#123;&amp;#123;msg&amp;#125;&amp;#125;&lt;/text&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>JS 只需要管理状态即可:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.setData(&amp;#123; msg: &quot;Hello World&quot; &amp;#125;)</span><br></pre></td></tr></table></figure></p>
+<p>通过 &#123;&#123; &#125;&#125; 的语法把一个变量绑定到界面上，我们称为数据绑定。仅仅通过数据绑定还不够完整的描述状态和界面的关系，还需要 if/else, for等控制能力，在小程序里边，这些控制能力都用 wx: 开头的属性来表达。</p>
+<h4 id="WXSS-样式"><a href="#WXSS-样式" class="headerlink" title="WXSS 样式"></a>WXSS 样式</h4><p>WXSS 具有 CSS 大部分的特性，小程序在 WXSS 也做了一些扩充和修改。<br>新增了尺寸单位。在写 CSS 样式时，开发者需要考虑到手机设备的屏幕会有不同的宽度和设备像素比，采用一些技巧来换算一些像素单位。WXSS 在底层支持新的尺寸单位 rpx ，开发者可以免去换算的烦恼，只要交给小程序底层来换算即可，由于换算采用的浮点数运算，所以运算结果会和预期结果有一点点偏差。<br>提供了全局的样式和局部样式。和前边 app.json, page.json 的概念相同，你可以写一个 app.wxss 作为全局样式，会作用于当前小程序的所有页面，局部页面样式 page.wxss 仅对当前页面生效。<br>此外 WXSS 仅支持部分 CSS 选择器</p>
+<h4 id="JS-交互逻辑"><a href="#JS-交互逻辑" class="headerlink" title="JS 交互逻辑"></a>JS 交互逻辑</h4><p>一个服务仅仅只有界面展示是不够的，还需要和用户做交互：响应用户的点击、获取用户的位置等等。在小程序里边，我们就通过编写 JS 脚本文件来处理用户的操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;view&gt;&amp;#123;&amp;#123; msg &amp;#125;&amp;#125;&lt;/view&gt;</span><br><span class="line">&lt;button bindtap=&quot;clickMe&quot;&gt;点击我&lt;/button&gt;</span><br></pre></td></tr></table></figure></p>
+<p>点击 button 按钮的时候，我们希望把界面上 msg 显示成 “Hello World”，于是我们在 button 上声明一个属性: bindtap ，在 JS 文件里边声明了 clickMe 方法来响应这次点击操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Page(&amp;#123;</span><br><span class="line">  clickMe: function() &amp;#123;</span><br><span class="line">    this.setData(&amp;#123; msg: &quot;Hello World&quot; &amp;#125;)</span><br><span class="line">  &amp;#125;</span><br><span class="line">&amp;#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h3><p>使用开发者工具可以预览小程序，帮助开发者检查小程序在移动客户端上的真实表现。<br>点击开发者工具顶部操作栏的预览按钮，开发者工具会自动打包当前项目，并上传小程序代码至微信的服务器，成功之后会在界面上显示一个二维码。使用当前小程序开发者的微信扫码即可看到小程序在手机客户端上的真实表现。</p>
+<h3 id="上传代码"><a href="#上传代码" class="headerlink" title="上传代码"></a>上传代码</h3><p>同预览不同，上传代码是用于提交体验或者审核使用的。<br>点击开发者工具顶部操作栏的上传按钮，填写版本号以及项目备注，需要注意的是，这里版本号以及项目备注是为了方便管理员检查版本使用的，开发者可以根据自己的实际要求来填写这两个字段。<br>上传成功之后，登录小程序管理后台 - 开发管理 - 开发版本 就可以找到刚提交上传的版本了。<br>可以将这个版本设置 体验版 或者是 提交审核</p>
+<h3 id="小程序的版本"><a href="#小程序的版本" class="headerlink" title="小程序的版本"></a>小程序的版本</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">版本</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">开发版本</td>
+<td style="text-align:center">使用开发者工具，可将代码上传到开发版本中。开发版本只保留每人最新的一份上传的代码。点击提交审核，可将代码提交审核。开发版本可删除，不影响线上版本和审核中版本的代码。</td>
+</tr>
+<tr>
+<td style="text-align:left">审核中版本</td>
+<td style="text-align:center">只能有一份代码处于审核中。有审核结果后可以发布到线上，也可直接重新提交审核，覆盖原审核版本。</td>
+</tr>
+<tr>
+<td style="text-align:left">线上版本</td>
+<td style="text-align:center">线上所有用户使用的代码版本，该版本代码在新版本代码发布后被覆盖更新。</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/practise-小程序-小白/" rel="tag"># practise|小程序|小白</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/13/hello/" rel="next" title="hello">
+                <i class="fa fa-chevron-left"></i> hello
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tigutf</p>
+              <p class="site-description motion-element" itemprop="description">tigutf的个人博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开发工具"><span class="nav-number">1.</span> <span class="nav-text">开发工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小程序结构"><span class="nav-number">2.</span> <span class="nav-text">小程序结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小程序配置-app-json"><span class="nav-number">2.1.</span> <span class="nav-text">小程序配置 app.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工具配置-project-config-json"><span class="nav-number">2.2.</span> <span class="nav-text">工具配置 project.config.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#页面配置-page-json"><span class="nav-number">2.3.</span> <span class="nav-text">页面配置 page.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WXML-模板"><span class="nav-number">2.4.</span> <span class="nav-text">WXML 模板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WXSS-样式"><span class="nav-number">2.5.</span> <span class="nav-text">WXSS 样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS-交互逻辑"><span class="nav-number">2.6.</span> <span class="nav-text">JS 交互逻辑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预览"><span class="nav-number">3.</span> <span class="nav-text">预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传代码"><span class="nav-number">4.</span> <span class="nav-text">上传代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小程序的版本"><span class="nav-number">5.</span> <span class="nav-text">小程序的版本</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tigutf</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
