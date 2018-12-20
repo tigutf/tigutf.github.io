@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java序列化]]></title>
+    <url>%2F2018%2F12%2F21%2F%E5%BA%8F%E5%88%97%E5%8C%961%2F</url>
+    <content type="text"><![CDATA[Java原生流的方法进行的序列化Json序列化FastJson序列化Protobuff序列化]]></content>
+      <categories>
+        <category>序列化</category>
+      </categories>
+      <tags>
+        <tag>Java|序列化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[读书-解忧杂货店]]></title>
+    <url>%2F2018%2F12%2F10%2F%E8%A7%A3%E5%BF%A7%E6%9D%82%E8%B4%A7%E5%BA%97%2F</url>
+    <content type="text"><![CDATA[看过不少日本动漫，但很少读过日本作者的书籍，看了一半《解忧杂货店》，我已经被东野圭吾的文字抓进去了。 19世纪七八十年代与现代，相差34年的时空交错； 杂货店老板–一位年迈的老人浪矢雄治，为周边的小孩大人提供答疑解忧，从不敷衍了事。卷铁门旁的邮箱–收取来咨询的信封，后门牛奶箱则放置回信。老人周而复始的思考每位来咨询的问题，绞尽脑汁地写下回信。 交错的时空，神奇的梦境，让老人得以知道他的回复，影响了哪些人，产生了哪些意义；或许言者无意，然听者有心；老人心里始终谦逊，认真的对待每个问题。他知道，每个烦恼忧愁的咨询后面，当事者都有了确定的选择，然而他们还是需要有一个可以商量的对象，这是心里精神上的需求。。 最后的咨询，一张空白的信纸，这是老爷子遇到的最难的一次咨询，也是最后的一次~之前所有咨询的信，都描述了各个咨询者的问题、烦恼，或者这就是一张地图，有线有方向也有点，只是咨询的主人公不知道怎么走，抑或是不知道往哪走；而这空白的信纸，主人公可能迷茫着不知道该咨询什么，不知道自己有什么方向可寻，在老人看来，或许这白纸，更展现着更大的可能性，更大的自由，为自己的生活去努力，那就好。 当所有咨询与烦恼的情节串联了起来，故事的玄妙精彩不言而喻。生活也好，工作也罢，梦想理想，我们都应该尽自己最大努力的实现，去践行~存在即是合理，不必太过执着忧愁，珍惜当下，珍惜眼前人，我们都需要有更大的胸怀去分享/去交流！]]></content>
+      <categories>
+        <category>读书</category>
+      </categories>
+      <tags>
+        <tag>东野圭吾</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[设计模式学习一]]></title>
+    <url>%2F2018%2F11%2F20%2F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F1%2F</url>
+    <content type="text"><![CDATA[Welcome to my T-SPACE~ 设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习 有这么一段概括: 单一职责原则告诉我们实现类、接口要职责单一； 里氏替换原则告诉我们不要破坏继承体系； 依赖倒置原则告诉我们要面向接口编程； 接口隔离原则告诉我们在设计接口的时候要精简单一； 迪米特法则告诉我们要降低耦合； 而开闭原则是总纲，他告诉我们要对扩展开放，对修改关闭。 单一职责原则 核心思想:应该有且仅有一个原因引起类的变更； 从业务角度来说，引起一个接口or类发生变化的原因，应该是一个有限制的单纯的最小业务单元； 比方说：项目设计开发中，我们肯定都接触过用户、角色、部门等管理模块（RBAC模型，Role-Based Access Control,基于角色的的访问控制，通过角色来完成用户权限的授予和取消，使动作主体用户与资源的行为即权限分离开）。针对用户管理、用户信息修改、用户增加部门、增加角色等信息和行为，我们为其定义一个接口： 12345678910public interface IUserInfo&#123; void setUserName(String userName); String getUserName(); void setPassword(String password); String getPassword(); boolean changePassword(String oldPassword); boolean deleteUser(String userName); boolean addOrg(String orgName); boolean addRole(String roleId);&#125; 这个接口设计有没有问题呢？当然有，用户的属性和行为都挤压在了一个接口中，容易造成混乱。]]></content>
+      <categories>
+        <category>Design pattern</category>
+      </categories>
+      <tags>
+        <tag>设计模式|SRP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[策略模式--实现规则配置以处理任务]]></title>
     <url>%2F2018%2F11%2F05%2F%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F-%E5%AE%9E%E7%8E%B0%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE%E5%A4%84%E7%90%86%2F</url>
     <content type="text"><![CDATA[Welcome to my T-SPACE~ 由于业务需求，会有不同渠道的信息组合，现有系统设计耦合度太高，不好扩展。所以对此进行重构，添加规则配置，以应对不同组合的需求信息获取和执行。这里边用到了策略模式。 原理策略模式的概念引用阎宏博士的《JAVA与模式》一书描述：策略模式属于对象的行为模式。其用意是针对一组算法，将每一个算法封装到具有共同接口的独立的类中，从而使得它们可以相互替换。策略模式使得算法可以在不影响到客户端的情况下发生变化。 实现原理面向对象编程有三大特性：封装、继承、多态。 封装–隐藏了类的内部实现机制，对外只暴露相关的访问方法，内部实现细节对外是不可知的。 继承–对父类代码的重用。 多态–在程序中定义的引用变量所指向的具体类型，以及通过该变量而指向的方法调用有不同种类型/实现（多种形态），具体引用了什么方法要在程序运行时依据具体指向的实例对象来决定。因为在程序运行时才确定具体的类，这样，不用修改源程序代码，就可以让引用变量绑定到各种不同的类实现上，从而导致该引用调用的具体方法随之改变，即不修改程序代码就可以改变程序运行时所绑定的具体代码，让程序可以选择多个运行状态，这就是多态性。 该策略模式的实现也是利用了多态的这一特性。 代码实现接口类123456789public interface ProcessStrategy&lt;T&gt; &#123; /** * @param result 结果集 * @param params 参数集 * @param key 结果集映射key * */ void operate(Map result, List&lt;T&gt; params, String key);&#125;` 接口实现1234567891011121314151617public class AtestProcess implements ProcessStrategy&lt;String&gt; &#123; @Override public void operate(Map result, List&lt;String&gt; params, String key) &#123; System.out.println(params.get(0)); //TODO 算法逻辑 result.put(key,"A"); &#125;&#125;public class AtestProcess implements ProcessStrategy&lt;Integer&gt; &#123; @Override public void operate(Map result, List&lt;Integer&gt; params, String key) &#123; System.out.println(params.get(0)); //TODO 算法逻辑 result.put(key,"B"); &#125;&#125; 定义工厂类定义Factory，程序运行中通过该类获取具体实例对象：12345678910111213public class ProcessFactory &#123; private static ProcessStrategy instance = null; public static ProcessStrategy getInstance(String clzName)&#123; try &#123; instance = (ProcessStrategy)Class.forName(clzName).newInstance(); &#125;catch (Exception e)&#123; System.out.println("Class not found.check the param 'clzName'. "); return null; &#125; return instance; &#125;&#125; 枚举配置通过以上代码，策略模式相关的实现大致完成，具体业务代码中使用ProcessFactory即可获取不同策略的实现方法，而要实现配置化，自动装载配置以应对不同的场景逻辑，还需要实现定义好我们的配置枚举类（配置表） 12345678910111213141516171819202122public enum TypeEnum &#123; TYPE_ENUM_A("A","com..impl.AtestProcess"), TYPE_ENUM_B("B","com..impl.BtestProcess"); private String key ; private String value; TypeEnum(String key, String value) &#123; this.key = key; this.value = value; &#125; public static String getValue(String key) &#123; for (TypeEnum typeEnum : TypeEnum.values())&#123; if (typeEnum.key.equalsIgnoreCase(key))&#123; return typeEnum.value; &#125; &#125; return null; &#125;&#125; 12345678910public String HelloTest()&#123; Map&lt;String,Object&gt; result = new HashMap&lt;&gt;(); List params = Arrays.asList("1","3","12"); String className = TypeEnum.getValue("A"); ProcessStrategy ps = ProcessFactory.getInstance(className); ps.operate(result, params, "testA"); String className = TypeEnum.getValue("B"); ps = ProcessFactory.getInstance(className); ps.operate(result, params, "testB"); &#125; 业务场景中需要走A还是走B，将条件记录于数据库/缓存redis/property文件中，当程序运行时再和TypeEnum中匹配，通过ProcessFactory捕获相应的实例对象来处理。当业务扩展，策略增多，我们只需要添加具体的接口实现，另外配置枚举对应，而不影响原来代码的主业务执行。 策略模式一方面也帮我们减少了if/else代码块过多而带来的sonar问题。]]></content>
@@ -21,11 +54,6 @@
       <tags>
         <tag>practise|小程序|小白</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[hello]]></title>
-    <url>%2F2018%2F09%2F13%2Fhello%2F</url>
-    <content type="text"></content>
   </entry>
   <entry>
     <title><![CDATA[First Blog Trip——HEXO]]></title>
