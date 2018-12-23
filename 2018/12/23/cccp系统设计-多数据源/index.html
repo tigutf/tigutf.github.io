@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多数据源|mysql," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="由于项目开发中涉及多个数据库，每个服务又需要连接多个数据库，所以这就需要多数据源切换了。">
+<meta name="keywords" content="多数据源|mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cccp系统设计-多数据源">
+<meta property="og:url" content="http://tigutf.github.io/2018/12/23/cccp系统设计-多数据源/index.html">
+<meta property="og:site_name" content="T-SPACE">
+<meta property="og:description" content="由于项目开发中涉及多个数据库，每个服务又需要连接多个数据库，所以这就需要多数据源切换了。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-23T15:53:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cccp系统设计-多数据源">
+<meta name="twitter:description" content="由于项目开发中涉及多个数据库，每个服务又需要连接多个数据库，所以这就需要多数据源切换了。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://tigutf.github.io/2018/12/23/cccp系统设计-多数据源/"/>
+
+
+
+
+
+  <title>cccp系统设计-多数据源 | T-SPACE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">T-SPACE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://tigutf.github.io/2018/12/23/cccp系统设计-多数据源/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tigutf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="T-SPACE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cccp系统设计-多数据源</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-23T23:53:51+08:00">
+                2018-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统设计-数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">系统设计|数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>由于项目开发中涉及多个数据库，每个服务又需要连接多个数据库，所以这就需要多数据源切换了。</p>
+<a id="more"></a>
+<h2 id="AbstractRoutingDataSource实现多数据源切换"><a href="#AbstractRoutingDataSource实现多数据源切换" class="headerlink" title="AbstractRoutingDataSource实现多数据源切换"></a>AbstractRoutingDataSource实现多数据源切换</h2><p>  在spring下我们要进行数据操作：</p>
+<ol>
+<li>sessionFactory会话工厂、transactionManager事务管理器设置dataSource，数据库连接信息；</li>
+<li>获取数据库的连接会话session,通过sessionFactory获取；</li>
+<li>通过会话session连接，与事务管理器，实现数据库操作，并保证事务完整。</li>
+</ol>
+<p>由此可见，要实现数据源切换，主要是能实现dataSource的动态更改;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Abstract &#123;@link javax.sql.DataSource&#125; implementation that routes &#123;@link #getConnection()&#125;</span><br><span class="line">calls to one of various target DataSources based on a lookup key. The latter is usually</span><br><span class="line">(but not necessarily) determined through some thread-bound transaction context.</span><br></pre></td></tr></table></figure></p>
+<p> AbstractRoutingDataSource–直译为抽象路由数据源，以上是spring中对它的解释：当获取某个数据库连接时，是基于lookup key来确定的。</p>
+<ul>
+<li>多数据源的动态切换，在程序运行时，把数据源数据源动态植入到程序中，灵活的进行数据源切换。</li>
+<li>基于多数据源的动态切换，我们可以实现读写分离，这么做缺点也很明显，无法动态的增加数据源。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//1）动态DataSource ,继承AbstractRoutingDataSource</span><br><span class="line">class DynamicDataSource extends AbstractRoutingDataSource &#123;</span><br><span class="line">   protected Object determineCurrentLookupKey() &#123;</span><br><span class="line">       return DynamicDataSourceContextHolder.getDataSourceType();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在springboot中用代码来配置动态的数据源，实现ImportBeanDefinitionRegistrar接口，应用加载时注册导入bean的定义，实现EnvironmentAware接口是为了获取系统环境信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@Description</span> 动态注册数据源加入spring容器中管理</span></span><br><span class="line"><span class="comment">* 初始化数据源和提供了执行动态切换数据源的工具类</span></span><br><span class="line"><span class="comment">* */</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicDataSourceRegister</span> <span class="keyword">implements</span> <span class="title">ImportBeanDefinitionRegistrar</span>, <span class="title">EnvironmentAware</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//指定默认数据源(springboot2.0默认数据源是hikari如何想使用其他数据源可以自己配置)</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DATASOURCE_TYPE_DEFAULT = <span class="string">"com.zaxxer.hikari.HikariDataSource"</span>;</span><br><span class="line">  <span class="comment">//默认数据源</span></span><br><span class="line">  <span class="keyword">private</span> DataSource defaultDataSource;</span><br><span class="line">  <span class="comment">//用户自定义数据源</span></span><br><span class="line">  <span class="keyword">private</span> Map&lt;String, DataSource&gt; customDataSources = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEnvironment</span><span class="params">(Environment environment)</span> </span>&#123;</span><br><span class="line">      initDefaultDataSource(environment);</span><br><span class="line">      initCustomDataSources(environment);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initDefaultDataSource</span><span class="params">(Environment env)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 读取主数据源</span></span><br><span class="line">      Map&lt;String, Object&gt; dsMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">      dsMap.put(<span class="string">"driver"</span>, env.getProperty(<span class="string">"spring.datasource.hikari.driver-class-name"</span>));</span><br><span class="line">      dsMap.put(<span class="string">"url"</span>, env.getProperty(<span class="string">"spring.datasource.hikari.jdbc-url"</span>));</span><br><span class="line">      dsMap.put(<span class="string">"username"</span>, env.getProperty(<span class="string">"spring.datasource.hikari.username"</span>));</span><br><span class="line">      dsMap.put(<span class="string">"password"</span>, env.getProperty(<span class="string">"spring.datasource.hikari.password"</span>));</span><br><span class="line">      defaultDataSource = buildDataSource(dsMap);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initCustomDataSources</span><span class="params">(Environment env)</span> </span>&#123;</span><br><span class="line">      <span class="comment">// 读取配置文件获取更多数据源</span></span><br><span class="line">      String dsPrefixs = env.getProperty(<span class="string">"spring.datasource.names"</span>);</span><br><span class="line">      <span class="keyword">for</span> (String dsPrefix : dsPrefixs.split(<span class="string">","</span>)) &#123;</span><br><span class="line">          <span class="comment">// 多个数据源</span></span><br><span class="line">          Map&lt;String, Object&gt; dsMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">          String firstStr = <span class="string">"spring.datasource."</span>;</span><br><span class="line">          dsMap.put(<span class="string">"driver"</span>, env.getProperty(firstStr + dsPrefix + <span class="string">".hikari.driver-class-name"</span>));</span><br><span class="line">          dsMap.put(<span class="string">"url"</span>, env.getProperty(firstStr + dsPrefix + <span class="string">".hikari.jdbc-url"</span>));</span><br><span class="line">          dsMap.put(<span class="string">"username"</span>, env.getProperty(firstStr + dsPrefix + <span class="string">".hikari.username"</span>));</span><br><span class="line">          dsMap.put(<span class="string">"password"</span>, env.getProperty(firstStr + dsPrefix + <span class="string">".hikari.password"</span>));</span><br><span class="line">          DataSource ds = buildDataSource(dsMap);</span><br><span class="line">          customDataSources.put(dsPrefix, ds);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> DataSource <span class="title">buildDataSource</span><span class="params">(Map&lt;String, Object&gt; dataSourceMap)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          Object type = dataSourceMap.get(<span class="string">"type"</span>);</span><br><span class="line">          <span class="keyword">if</span> (type == <span class="keyword">null</span>) &#123;</span><br><span class="line">              type = DATASOURCE_TYPE_DEFAULT;<span class="comment">// 默认DataSource</span></span><br><span class="line">          &#125;</span><br><span class="line">          Class&lt;? extends DataSource&gt; dataSourceType;</span><br><span class="line">          dataSourceType = (Class&lt;? extends DataSource&gt;) Class.forName((String) type);</span><br><span class="line">          String driverClassName = dataSourceMap.get(<span class="string">"driver"</span>).toString();</span><br><span class="line">          String url = dataSourceMap.get(<span class="string">"url"</span>).toString();</span><br><span class="line">          String username = dataSourceMap.get(<span class="string">"username"</span>).toString();</span><br><span class="line">          String password = dataSourceMap.get(<span class="string">"password"</span>).toString();</span><br><span class="line">          <span class="comment">// 自定义DataSource配置</span></span><br><span class="line">          DataSourceBuilder factory = DataSourceBuilder.create().driverClassName(driverClassName).url(url)</span><br><span class="line">                  .username(username).password(password).type(dataSourceType);</span><br><span class="line">          <span class="keyword">return</span> factory.build();</span><br><span class="line">      &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerBeanDefinitions</span><span class="params">(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry)</span> </span>&#123;</span><br><span class="line">      Map&lt;Object, Object&gt; targetDataSources = <span class="keyword">new</span> HashMap&lt;Object, Object&gt;();</span><br><span class="line">      <span class="comment">//添加默认数据源</span></span><br><span class="line">      targetDataSources.put(<span class="string">"main"</span>, <span class="keyword">this</span>.defaultDataSource);</span><br><span class="line">      DynamicDataSourceContextHolder.dataSourceIds.add(<span class="string">"main"</span>);</span><br><span class="line">      <span class="comment">//添加其他数据源</span></span><br><span class="line">      targetDataSources.putAll(customDataSources);</span><br><span class="line">      <span class="keyword">for</span> (String key : customDataSources.keySet()) &#123;</span><br><span class="line">          DynamicDataSourceContextHolder.dataSourceIds.add(key);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//创建DynamicDataSource</span></span><br><span class="line">      GenericBeanDefinition beanDefinition = <span class="keyword">new</span> GenericBeanDefinition();</span><br><span class="line">      beanDefinition.setBeanClass(DynamicDataSource.class);</span><br><span class="line">      beanDefinition.setSynthetic(<span class="keyword">true</span>);</span><br><span class="line">      MutablePropertyValues mpv = beanDefinition.getPropertyValues();</span><br><span class="line">      mpv.addPropertyValue(<span class="string">"defaultTargetDataSource"</span>, defaultDataSource);</span><br><span class="line">      mpv.addPropertyValue(<span class="string">"targetDataSources"</span>, targetDataSources);</span><br><span class="line">      <span class="comment">//注册 - BeanDefinitionRegistry</span></span><br><span class="line">      beanDefinitionRegistry.registerBeanDefinition(<span class="string">"dataSource"</span>, beanDefinition);</span><br><span class="line">      log.info(<span class="string">"Dynamic DataSource Registry"</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>当代理类-动态数据源DynamicDataSource定义好，具体各个dataSource也动态注入spring中，现在需要实现如何更改DynamicDataSource的looku key的变化，用ThreadLocal来保证线程安全,存储对应dataSource的关键字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class DynamicDataSourceContextHolder &#123;</span><br><span class="line"></span><br><span class="line">    //存放当前线程使用的数据源类型信息</span><br><span class="line">    private static final ThreadLocal&lt;String&gt; contextHolder = new ThreadLocal&lt;String&gt;();</span><br><span class="line">    //存放数据源id</span><br><span class="line">    public static List&lt;String&gt; dataSourceIds = new ArrayList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">    //设置数据源</span><br><span class="line">    public static void setDataSourceType(String dataSourceType) &#123;</span><br><span class="line">        contextHolder.set(dataSourceType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //获取数据源</span><br><span class="line">    public static String getDataSourceType() &#123;</span><br><span class="line">        return contextHolder.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //清除数据源</span><br><span class="line">    public static void clearDataSourceType() &#123;</span><br><span class="line">        contextHolder.remove();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //判断当前数据源是否存在</span><br><span class="line">    public static boolean isContainsDataSource(String dataSourceId) &#123;</span><br><span class="line">        return dataSourceIds.contains(dataSourceId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多个SessionFactory实现数据源切换"><a href="#多个SessionFactory实现数据源切换" class="headerlink" title="多个SessionFactory实现数据源切换"></a>多个SessionFactory实现数据源切换</h2><blockquote>
+<p>在高并发，一个方法中需要切换多个数据进行操作，还要保证事务管理的情况下，第一种方法中，我们需要频繁的修改threadLocal中的值，及时调整ThreadLocal中的值，否则当线程依旧绑定着上一个key时，容易发生Table not exist的异常，代码逻辑也就变得相对复杂。</p>
+</blockquote>
+<p>在spring4版本中也是支持多数据库切换的，设置多个SessionFactory和transactionManager，对应多个dataSource；主要也是以空间换取的功能实现；通过事务注解即可切换对应的数据源，并保证事务的一致性。</p>
+<blockquote>
+<p>代码就不贴了，DataSource、SessionFactory和transactionManager分别定义多个，一一对应。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多数据源-mysql/" rel="tag"># 多数据源|mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/21/序列化1/" rel="next" title="Java序列化">
+                <i class="fa fa-chevron-left"></i> Java序列化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/23/cccp系统设计-缓存/" rel="prev" title="cccp系统设计-缓存">
+                cccp系统设计-缓存 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Tigutf</p>
+              <p class="site-description motion-element" itemprop="description">tigutf的个人博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AbstractRoutingDataSource实现多数据源切换"><span class="nav-number">1.</span> <span class="nav-text">AbstractRoutingDataSource实现多数据源切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多个SessionFactory实现数据源切换"><span class="nav-number">2.</span> <span class="nav-text">多个SessionFactory实现数据源切换</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tigutf</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
