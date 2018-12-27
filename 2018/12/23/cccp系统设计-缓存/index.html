@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="redis|," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
+<meta name="description" content="题外引言–积极主动 接受刺激——&amp;gt;反应，出于惯性思维，习惯性的做出反应，而把反应结果归咎于外界刺激，这不是积极主动的表现。刺激到反应的中间，我们都有选择的权力，结果如何都是我们自己选择的结果，我们必须负责。关注圈往往离我们太远，影响圈才是我们应投入精力，更主动去改变的范围。">
+<meta name="keywords" content="redis|">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cccp系统设计-缓存">
+<meta property="og:title" content="散谈二-缓存">
 <meta property="og:url" content="http://tigutf.github.io/2018/12/23/cccp系统设计-缓存/index.html">
 <meta property="og:site_name" content="T-SPACE">
+<meta property="og:description" content="题外引言–积极主动 接受刺激——&amp;gt;反应，出于惯性思维，习惯性的做出反应，而把反应结果归咎于外界刺激，这不是积极主动的表现。刺激到反应的中间，我们都有选择的权力，结果如何都是我们自己选择的结果，我们必须负责。关注圈往往离我们太远，影响圈才是我们应投入精力，更主动去改变的范围。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-23T15:54:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cccp系统设计-缓存">
+<meta name="twitter:title" content="散谈二-缓存">
+<meta name="twitter:description" content="题外引言–积极主动 接受刺激——&amp;gt;反应，出于惯性思维，习惯性的做出反应，而把反应结果归咎于外界刺激，这不是积极主动的表现。刺激到反应的中间，我们都有选择的权力，结果如何都是我们自己选择的结果，我们必须负责。关注圈往往离我们太远，影响圈才是我们应投入精力，更主动去改变的范围。">
 
 
 
@@ -122,7 +126,7 @@
 
 
 
-  <title>cccp系统设计-缓存 | T-SPACE</title>
+  <title>散谈二-缓存 | T-SPACE</title>
   
 
 
@@ -256,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">cccp系统设计-缓存</h1>
+          <h1 class="post-title" itemprop="name headline">散谈二-缓存</h1>
         
 
         <div class="post-meta">
@@ -278,6 +282,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/缓存/" itemprop="url" rel="index">
+                    <span itemprop="name">缓存</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -306,7 +332,45 @@
       
 
       
-        <a id="more"></a>
+        <ul>
+<li>题外引言–积极主动<blockquote>
+<p>接受刺激——&gt;反应，出于惯性思维，习惯性的做出反应，而把反应结果归咎于外界刺激，这不是积极主动的表现。刺激到反应的中间，我们都有选择的权力，结果如何都是我们自己选择的结果，我们必须负责。关注圈往往离我们太远，影响圈才是我们应投入精力，更主动去改变的范围。</p>
+</blockquote>
+</li>
+</ul>
+<a id="more"></a>
+<p><em>在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。
+</em></p>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><blockquote>
+<p>Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.</p>
+</blockquote>
+<ul>
+<li><p>Redis是一个开源的内存数据存储，可被用于做数据库、缓存和消息队列。官方文档中redis是可用做数据库，但实际应用中，redis用的是内存存储，当作数据库并存储到一半容量以上时，其性能是很差的，所以更多的是用作缓存和消息队列。</p>
+</li>
+<li><p>我们的系统中，使用redis做缓存中间件，应用启动加载时会先将系统相应数据字典、参数配置等加入redis缓存中，当每个应用需要用到时，再从redis中读取，因为储存于内存，响应非常快。在项目中采用两主两从三哨兵的模式，因为项目量级提升，从单节点转变成多节点（集群模式），所以原本只是Jedis（JedisPool）来连接redis进行操作，后面改造为SharedJedis，实现redis的分片，根据一致性Hash ID计算后分配到不同的分片上（即不同的节点redis）。</p>
+</li>
+<li><p>SharedJedis是jedis的jar包中提供的基于客户端分片的实现。<br>SharedJedis分片相关的代码基本都在redis.clients.util.Sharded类中。<br>下面是Sharded类的构造函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"><span class="doctag">@param</span> shards，redis服务信息对象的list集合（ShardInfo的子类，如JedisShardInfo，存放了redis子节点的ip、端口、weight等信息）。</span></span><br><span class="line"><span class="comment"><span class="doctag">@param</span> hash算法（默认一致性hash），jedis中指定了两种hash实现，一种是一致性hash，一种是基于md5的实现，在redis.clients.util.Hashing中指定的。</span></span><br><span class="line"><span class="comment"><span class="doctag">@param</span> tagPattern，可以指定按照key的某一部分进行hash分片（比如我们可以将以order开头的key分配到redis节点1上，可以将以product开头的key分配到redis节点2上），默认情况下是根据整个key进行hash分片的。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Sharded</span><span class="params">(List&lt;S&gt; shards, Hashing algo, Pattern tagPattern)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.algo = algo;</span><br><span class="line">    <span class="keyword">this</span>.tagPattern = tagPattern;</span><br><span class="line">    initialize(shards);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Sharded构造函数中调用了initialize方法完成分片的一些初始化操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private void initialize(List&lt;S&gt; shards) &#123;</span><br><span class="line">    nodes = new TreeMap&lt;Long, S&gt;();</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i != shards.size(); ++i) &#123;</span><br><span class="line">      final S shardInfo = shards.get(i);</span><br><span class="line">      if (shardInfo.getName() == null) for (int n = 0; n &lt; 160 * shardInfo.getWeight(); n++) &#123;</span><br><span class="line">        nodes.put(this.algo.hash(&quot;SHARD-&quot; + i + &quot;-NODE-&quot; + n), shardInfo);</span><br><span class="line">      &#125;</span><br><span class="line">      else for (int n = 0; n &lt; 160 * shardInfo.getWeight(); n++) &#123;</span><br><span class="line">        nodes.put(this.algo.hash(shardInfo.getName() + &quot;*&quot; + n), shardInfo);</span><br><span class="line">      &#125;</span><br><span class="line">      resources.put(shardInfo, shardInfo.createResource());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>首先根据redis节点集合信息创建虚拟节点（一致性hash上0~2^32之间的点），通过上面的源码可以看出，根据每个redis节点的name计算出对应的hash值（如果没有配置节点名称，就是用默认的名字），并创建了160<em>weight个虚拟节点，weight默认情况下等于1，如果某个节点的配置较高，可以适当的提高虚拟节点的个数，将更多的请求打到这个节点上。SharedJedis并不支持多个key的操作，例如 keys </em> ；因为多个key计算出来的分片可能不一样，读需要多个节点同时计算后做归并交集才能得到结果，写的时候无法判断所有key是否都写成功，一致性得不到保障。</p>
+</blockquote>
+<ul>
+<li>SharedJedis的这个实现，参照了一致性Hash算法(consistent hashing)。<br>可参考：<br><a href="http://blog.csdn.net/cywosp/article/details/23397179" target="_blank" rel="noopener">http://blog.csdn.net/cywosp/article/details/23397179</a></li>
+</ul>
+<h2 id="Guava-cacheLoader"><a href="#Guava-cacheLoader" class="headerlink" title="Guava cacheLoader"></a>Guava cacheLoader</h2><p><strong><font color="blue"><br>Guava是一个超棒的工具类库~<br>Guava工程包含了若干被Google的Java项目广泛依赖的核心库，例如：集合 [collections] 、缓存 [caching] 、原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、字符串处理 [string processing] 、I/O 等等。</font>
+</strong></p>
+<p>LocalCache是一种很好的优化方案，它可以成倍的提高处理效率。Guava cache只是它其中一种方案选择。在我们的系统功能设计中，我们用到的是LoadingCache<k,t>。若说Redis为一级缓存，CacheLoader则是二级缓存；</k,t></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数据加载器</span></span><br><span class="line">CacheLoader&lt;K, T&gt; loader = <span class="keyword">new</span> CacheLoader&lt;K, T&gt; () &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> T <span class="title">load</span><span class="params">(K Key)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">// TODO load data.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//Guava cache 的创建</span></span><br><span class="line"><span class="keyword">return</span> CacheBuilder.newBuilder()</span><br><span class="line">  .maximumSize(<span class="number">1000</span>)<span class="comment">//最大容量</span></span><br><span class="line">  .expireAfterWrite(<span class="number">2</span>, TimeUnit.MINUTES)<span class="comment">//缓存写入后的过期时间2min</span></span><br><span class="line">  .build(loader);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>我是用的CacheLoader的方式，先定义一个CacheLoader加载器,然后用CacheBuilder进行构建，流式定义缓存大小、缓存失效时间、缓存刷新时间等等（Guava Cache提供了多种缓存机制）。LoadingCache执行时，先从已有缓存中通过key查找，若没有则执行load方法加载一遍key的值。<font color="Orange"><strong>注意：当执行load查询加载数据也都查询不到时，Loading Cache的get方法会直接抛出空指针异常，这是需要防范的。建议可以配合Option<t>一起使用，即CacheLoader&lt;K,Option<t>&gt;这样子定义。Guava对NPE有其严谨的规范。</t></t></strong></font></li>
+</ul>
+<p>LoadingCache有另一种实现方式——Callable</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testcallableCache</span><span class="params">()</span><span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    Cache&lt;String, String&gt; cache = CacheBuilder.newBuilder().maximumSize(<span class="number">1000</span>).build();  </span><br><span class="line">    String resultVal = cache.get(<span class="string">"Hello"</span>, <span class="keyword">new</span> Callable&lt;String&gt;() &#123;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">            <span class="comment">//TODO 获取值  </span></span><br><span class="line">            System.out.println(<span class="string">"Hello "</span>);            </span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    System.out.println(<span class="string">"Hello "</span> + resultVal);</span><br><span class="line"></span><br><span class="line">    resultVal = cache.get(<span class="string">"test"</span>, <span class="keyword">new</span> Callable&lt;String&gt;() &#123;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;             </span><br><span class="line">            <span class="comment">//TODO 获取值</span></span><br><span class="line">            System.out.println(<span class="string">"Test"</span>);</span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    System.out.println(<span class="string">"test value : "</span> + resultVal);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -322,6 +386,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/redis/" rel="tag"># redis|</a>
+          
+        </div>
+      
 
       
       
@@ -331,8 +401,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/23/cccp系统设计-多数据源/" rel="next" title="cccp系统设计-多数据源">
-                <i class="fa fa-chevron-left"></i> cccp系统设计-多数据源
+              <a href="/2018/12/23/cccp系统设计-多数据源/" rel="next" title="散谈一-多数据源">
+                <i class="fa fa-chevron-left"></i> 散谈一-多数据源
               </a>
             
           </div>
@@ -395,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -422,7 +501,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -433,7 +512,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -456,6 +535,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Guava-cacheLoader"><span class="nav-number">2.</span> <span class="nav-text">Guava cacheLoader</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
