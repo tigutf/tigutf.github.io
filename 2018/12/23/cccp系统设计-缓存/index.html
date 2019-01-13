@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题外引言–积极主动 接受刺激——&amp;gt;反应，出于惯性思维，习惯性的做出反应，而把反应结果归咎于外界刺激，这不是积极主动的表现。刺激到反应的中间，我们都有选择的权力，结果如何都是我们自己选择的结果，我们必须负责。关注圈往往离我们太远，影响圈才是我们应投入精力，更主动去改变的范围。">
+<meta name="description" content="在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。  Redis Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and m">
 <meta name="keywords" content="redis|">
 <meta property="og:type" content="article">
 <meta property="og:title" content="散谈二-缓存">
 <meta property="og:url" content="http://tigutf.github.io/2018/12/23/cccp系统设计-缓存/index.html">
 <meta property="og:site_name" content="T-SPACE">
-<meta property="og:description" content="题外引言–积极主动 接受刺激——&amp;gt;反应，出于惯性思维，习惯性的做出反应，而把反应结果归咎于外界刺激，这不是积极主动的表现。刺激到反应的中间，我们都有选择的权力，结果如何都是我们自己选择的结果，我们必须负责。关注圈往往离我们太远，影响圈才是我们应投入精力，更主动去改变的范围。">
+<meta property="og:description" content="在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。  Redis Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and m">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-23T15:54:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="散谈二-缓存">
-<meta name="twitter:description" content="题外引言–积极主动 接受刺激——&amp;gt;反应，出于惯性思维，习惯性的做出反应，而把反应结果归咎于外界刺激，这不是积极主动的表现。刺激到反应的中间，我们都有选择的权力，结果如何都是我们自己选择的结果，我们必须负责。关注圈往往离我们太远，影响圈才是我们应投入精力，更主动去改变的范围。">
+<meta name="twitter:description" content="在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。  Redis Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and m">
 
 
 
@@ -332,13 +332,7 @@
       
 
       
-        <ul>
-<li>题外引言–积极主动<blockquote>
-<p>接受刺激——&gt;反应，出于惯性思维，习惯性的做出反应，而把反应结果归咎于外界刺激，这不是积极主动的表现。刺激到反应的中间，我们都有选择的权力，结果如何都是我们自己选择的结果，我们必须负责。关注圈往往离我们太远，影响圈才是我们应投入精力，更主动去改变的范围。</p>
-</blockquote>
-</li>
-</ul>
-<a id="more"></a>
+        <a id="more"></a>
 <p><em>在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。
 </em></p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><blockquote>
@@ -371,6 +365,9 @@
 </ul>
 <p>LoadingCache有另一种实现方式——Callable</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testcallableCache</span><span class="params">()</span><span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    Cache&lt;String, String&gt; cache = CacheBuilder.newBuilder().maximumSize(<span class="number">1000</span>).build();  </span><br><span class="line">    String resultVal = cache.get(<span class="string">"Hello"</span>, <span class="keyword">new</span> Callable&lt;String&gt;() &#123;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">            <span class="comment">//TODO 获取值  </span></span><br><span class="line">            System.out.println(<span class="string">"Hello "</span>);            </span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    System.out.println(<span class="string">"Hello "</span> + resultVal);</span><br><span class="line"></span><br><span class="line">    resultVal = cache.get(<span class="string">"test"</span>, <span class="keyword">new</span> Callable&lt;String&gt;() &#123;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;             </span><br><span class="line">            <span class="comment">//TODO 获取值</span></span><br><span class="line">            System.out.println(<span class="string">"Test"</span>);</span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    System.out.println(<span class="string">"test value : "</span> + resultVal);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<!-- end -->
+<p><em>^<em>__</em>^</em></p>
+<font color="blue" face="楷体"><br>好好学习天天向上~<br><br><br>分享、交流、共同进步~<br></font>
 
       
     </div>
@@ -565,7 +562,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

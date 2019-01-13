@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="T-SPACE">
 <meta property="og:description" content="Welcome to my T-SPACE~ 由于业务需求，会有不同渠道的信息组合，现有系统设计耦合度太高，不好扩展。所以对此进行重构，添加规则配置，以应对不同组合的需求信息获取和执行。这里边用到了策略模式。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-05T16:58:05.281Z">
+<meta property="og:updated_time" content="2019-01-13T17:55:42.228Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="策略模式--实现规则配置以处理任务">
 <meta name="twitter:description" content="Welcome to my T-SPACE~ 由于业务需求，会有不同渠道的信息组合，现有系统设计耦合度太高，不好扩展。所以对此进行重构，添加规则配置，以应对不同组合的需求信息获取和执行。这里边用到了策略模式。">
@@ -351,6 +351,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">HelloTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Map&lt;String,Object&gt; result = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        List params = Arrays.asList(<span class="string">"1"</span>,<span class="string">"3"</span>,<span class="string">"12"</span>);</span><br><span class="line">        String className = TypeEnum.getValue(<span class="string">"A"</span>);</span><br><span class="line">        ProcessStrategy ps = ProcessFactory.getInstance(className);</span><br><span class="line">        ps.operate(result, params, <span class="string">"testA"</span>);</span><br><span class="line">        String className = TypeEnum.getValue(<span class="string">"B"</span>);</span><br><span class="line">        ps = ProcessFactory.getInstance(className);</span><br><span class="line">        ps.operate(result, params, <span class="string">"testB"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>业务场景中需要走A还是走B，将条件记录于数据库/缓存redis/property文件中，当程序运行时再和TypeEnum中匹配，通过ProcessFactory捕获相应的实例对象来处理。当业务扩展，策略增多，我们只需要添加具体的接口实现，另外配置枚举对应，而不影响原来代码的主业务执行。</p>
 <p><strong>策略模式一方面也帮我们减少了if/else代码块过多而带来的sonar问题。</strong></p>
+<!-- end -->
+<font color="blue" face="楷体"><br>好好学习天天向上~<br><br><br>分享、交流、共同进步~<br></font>
 
       
     </div>
@@ -545,7 +547,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
