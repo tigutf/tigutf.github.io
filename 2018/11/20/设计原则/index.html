@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="T-SPACE">
 <meta property="og:description" content="Welcome to my T-SPACE~  设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-13T17:55:52.246Z">
+<meta property="og:updated_time" content="2019-01-14T15:36:42.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式学习一">
 <meta name="twitter:description" content="Welcome to my T-SPACE~  设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习">
@@ -352,9 +352,8 @@
 <p>从业务角度来说，引起一个接口or类发生变化的原因，应该是一个有限制的单纯的最小业务单元；</p>
 <p>比方说：项目设计开发中，我们肯定都接触过用户、角色、部门等管理模块（RBAC模型，Role-Based Access Control,基于角色的的访问控制，通过角色来完成用户权限的授予和取消，使动作主体用户与资源的行为即权限分离开）。针对用户管理、用户信息修改、用户增加部门、增加角色等信息和行为，我们为其定义一个接口：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IUserInfo</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">setUserName</span><span class="params">(String userName)</span></span>;</span><br><span class="line">  <span class="function">String <span class="title">getUserName</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span></span>;</span><br><span class="line">  <span class="function">String <span class="title">getPassword</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">changePassword</span><span class="params">(String oldPassword)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">deleteUser</span><span class="params">(String userName)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">addOrg</span><span class="params">(String orgName)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">addRole</span><span class="params">(String roleId)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个接口设计有没有问题呢？<br>当然有，用户的属性和行为都挤压在了一个接口中，容易造成混乱。</p>
-<!-- end -->
-<font color="blue" face="楷体"><br>好好学习天天向上~<br><br><br>分享、交流、共同进步~<br></font>
+<p>这个接口设计有没有问题呢？<br>当然有，用户的属性和行为都挤压在了一个接口中，容易造成混乱。<br><!-- end --></p>
+<font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>
 
       
     </div>

@@ -88,7 +88,7 @@
 <meta property="og:description" content="网上有很多对HashMap，HashTable几个集合类的对比与解说,看了下源码，记下笔记~">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://thyrsi.com/t6/617/1543336152x2890174124.jpg">
-<meta property="og:updated_time" content="2019-01-13T17:55:57.844Z">
+<meta property="og:updated_time" content="2019-01-14T15:36:51.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读读HashMap(1)">
 <meta name="twitter:description" content="网上有很多对HashMap，HashTable几个集合类的对比与解说,看了下源码，记下笔记~">
@@ -373,9 +373,8 @@
 <li>如果计算定位到的数组位置不含链表（当前entry的next指向null），那么对于查找、添加操作很快，仅需一次寻址即可，时间复杂度O(1);</li>
 <li>如果定位到的位置包含链表，对于添加操作，首先遍历链表，存在则覆盖，否则新增，其时间复杂度O(n);对于查找操作，仍需遍历链表，逐一对比key对象查找；</li>
 </ol>
-<p>所以，从性能考虑，HashMap中的链表出现越少，性能才会越好。</p>
-<!-- end -->
-<font color="blue" face="楷体"><br>好好学习天天向上~<br><br><br>分享、交流、共同进步~<br></font>
+<p>所以，从性能考虑，HashMap中的链表出现越少，性能才会越好。<br><!-- end --></p>
+<font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>
 
       
     </div>

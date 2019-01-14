@@ -312,12 +312,14 @@
 
       
         
-          
-            <a id="more"></a>
-<!--end-->
-<font color="blue" face="楷体"><br>好好学习天天向上~<br><br><br>分享、交流、共同进步~<br></font>
-
-          
+          <p>任务处理异常重试机制<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/23/cccp系统设计-异常重试-分片应用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -491,8 +493,7 @@
 <p>LoadingCache有另一种实现方式——Callable</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testcallableCache</span><span class="params">()</span><span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    Cache&lt;String, String&gt; cache = CacheBuilder.newBuilder().maximumSize(<span class="number">1000</span>).build();  </span><br><span class="line">    String resultVal = cache.get(<span class="string">"Hello"</span>, <span class="keyword">new</span> Callable&lt;String&gt;() &#123;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">            <span class="comment">//TODO 获取值  </span></span><br><span class="line">            System.out.println(<span class="string">"Hello "</span>);            </span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    System.out.println(<span class="string">"Hello "</span> + resultVal);</span><br><span class="line"></span><br><span class="line">    resultVal = cache.get(<span class="string">"test"</span>, <span class="keyword">new</span> Callable&lt;String&gt;() &#123;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;             </span><br><span class="line">            <span class="comment">//TODO 获取值</span></span><br><span class="line">            System.out.println(<span class="string">"Test"</span>);</span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    System.out.println(<span class="string">"test value : "</span> + resultVal);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <!-- end -->
-<p><em>^<em>__</em>^</em></p>
-<font color="blue" face="楷体"><br>好好学习天天向上~<br><br><br>分享、交流、共同进步~<br></font>
+<font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>
 
           
         
@@ -781,7 +782,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="/URL1" rel="gallery_cjqv7esqp000eqkupz2dp2j1s"
+                 href="/URL1" rel="gallery_cjqwht06y000ejoupb0qziow5"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="/URL1" itemprop="contentUrl"/>
               </a>
@@ -789,7 +790,7 @@
           
             
               <a class="post-gallery-img fancybox"
-                 href="/URL2" rel="gallery_cjqv7esqp000eqkupz2dp2j1s"
+                 href="/URL2" rel="gallery_cjqwht06y000ejoupb0qziow5"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="/URL2" itemprop="contentUrl"/>
               </a>
@@ -803,7 +804,7 @@
 
       
         
-          <h1 id="Java原生流的方法进行的序列化"><a href="#Java原生流的方法进行的序列化" class="headerlink" title="Java原生流的方法进行的序列化"></a>Java原生流的方法进行的序列化</h1><h1 id="Json序列化"><a href="#Json序列化" class="headerlink" title="Json序列化"></a>Json序列化</h1><h1 id="FastJson序列化"><a href="#FastJson序列化" class="headerlink" title="FastJson序列化"></a>FastJson序列化</h1><h1 id="Protobuff序列化"><a href="#Protobuff序列化" class="headerlink" title="Protobuff序列化"></a>Protobuff序列化</h1>
+          <h2 id="Java原生流的方法进行的序列化"><a href="#Java原生流的方法进行的序列化" class="headerlink" title="Java原生流的方法进行的序列化"></a>Java原生流的方法进行的序列化</h2><h2 id="Json序列化"><a href="#Json序列化" class="headerlink" title="Json序列化"></a>Json序列化</h2><h2 id="FastJson序列化"><a href="#FastJson序列化" class="headerlink" title="FastJson序列化"></a>FastJson序列化</h2><h2 id="Protobuff序列化"><a href="#Protobuff序列化" class="headerlink" title="Protobuff序列化"></a>Protobuff序列化</h2>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/12/21/序列化1/#more" rel="contents">
@@ -1662,7 +1663,7 @@
       
         
           
-            <p>�ο��� <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+            <p><a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
@@ -1672,9 +1673,7 @@
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 <!-- end -->
-<p><em>^<em>__</em>^</em></p>
-<font color="blue" face="����"><br>�ú�ѧϰ��������~<br><br><br>��������������ͬ����~<br></font>
-
+<font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>
 
           
         
