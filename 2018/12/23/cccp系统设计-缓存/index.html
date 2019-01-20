@@ -74,23 +74,25 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="T-SPACE" type="application/atom+xml" />
 
 
 
 
 
-<meta name="description" content="在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。  Redis Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and m">
+
+<meta name="description" content="在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。">
 <meta name="keywords" content="redis|">
 <meta property="og:type" content="article">
 <meta property="og:title" content="散谈二-缓存">
 <meta property="og:url" content="http://tigutf.github.io/2018/12/23/cccp系统设计-缓存/index.html">
 <meta property="og:site_name" content="T-SPACE">
-<meta property="og:description" content="在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。  Redis Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and m">
+<meta property="og:description" content="在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-12-23T15:54:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="散谈二-缓存">
-<meta name="twitter:description" content="在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。  Redis Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and m">
+<meta name="twitter:description" content="在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。">
 
 
 
@@ -332,9 +334,8 @@
       
 
       
-        <a id="more"></a>
-<p><em>在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。
-</em></p>
+        <p><em>在系统项目的设计开发中，我们避免不了需要到一些数据字典、参数配置、状态常数等，实时的总是从数据库或者文件中读取，是很耗性能的，而且速度也比较慢，所以使用缓存，当然是最佳的选择。
+</em><br><a id="more"></a></p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><blockquote>
 <p>Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker.</p>
 </blockquote>
@@ -486,7 +487,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -508,7 +509,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -516,6 +517,13 @@
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
