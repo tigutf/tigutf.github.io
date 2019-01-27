@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="T-SPACE">
 <meta property="og:description" content="Welcome to my T-SPACE~  设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-14T15:36:42.933Z">
+<meta property="og:updated_time" content="2019-01-21T17:25:14.311Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式学习一">
 <meta name="twitter:description" content="Welcome to my T-SPACE~  设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习">
@@ -316,6 +316,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
           
 
@@ -339,22 +344,32 @@
 <p>设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习</p>
 </blockquote>
 <a id="more"></a>
-<p>有这么一段概括:</p>
+<h1 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h1><p>有这么一段概括:</p>
 <ol>
 <li>单一职责原则告诉我们实现类、接口要职责单一；</li>
 <li>里氏替换原则告诉我们不要破坏继承体系；</li>
 <li>依赖倒置原则告诉我们要面向接口编程；</li>
 <li>接口隔离原则告诉我们在设计接口的时候要精简单一；</li>
 <li>迪米特法则告诉我们要降低耦合；</li>
-<li>而开闭原则是总纲，他告诉我们要对扩展开放，对修改关闭。</li>
+<li>而开闭原则是总纲，它告诉我们要对扩展开放，对修改关闭。</li>
 </ol>
-<h2 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h2><ul>
-<li><strong>核心思想:应该有且仅有一个原因引起类的变更；</strong></li>
+<h2 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h2><blockquote>
+<p>Single Responsibility Principle, 简称SRP</p>
+</blockquote>
+<p><strong>单一职责原则的定义是:应该有且仅有一个原因引起类的变更；</strong><br>从业务角度来说，引起一个接口or类发生变化的原因，应该是一个有限制的单纯的最小业务单元；</p>
+<blockquote>
+<p>例子1：RBAC模型，Role-Based Access Control,基于角色的的访问控制。系统用户信息定义是我们总遇到的业务之一。用户信息接口，若我们直接定义用户属性（姓名、密码、所在部门）+ 用户行为（修改姓名、修改密码等）在一个接口中，该接口同时承担用户属性信息和用户行为的职责，这是容易引起混淆的，这不符合单一职责原则的。拆分为两个接口，不同场景下使用不同的接口（信息的查询和操作分开），各司其职，一目了然。</p>
+<p>例子2：电话通话的用例定义：拨号、通话、回应、挂机。一个接口IMobile将电话通话全涵盖。看似可以，但包含两层职责：a.拨号和挂断，这是通话协议管理; b.通话回应则是数据传送。实际业务，这两层职责相关联，若两个接口两个类，一个电话要两个类来组合定义，强耦合关系，增加了类的复杂度，这似乎也不太合理。换种角度，两种职责，定义两个接口，由一个电话类实现这两个接口，将两个职责融合在一个类中。对外发布仅仅是接口，而非实现类，这样也体现了接口的单一职责。</p>
+</blockquote>
+<p>通过上面的例子，我们来总结一下单一职责原则有什么好处：</p>
+<ul>
+<li>类的复杂性降低，实现什么职责都有清晰明确的定义；</li>
+<li>可读性提高，复杂性降低，那当然可读性提高了；</li>
+<li>可维护性提高，可读性提高，那当然更容易维护了；</li>
+<li>变更引起的风险降低，变更是必不可少的，如果接口的单一职责做得好，一个接口修改只对相应的实现类有影响，对其他的接口无影响，这对系统的扩展性、维护性都有非常大的帮助。</li>
 </ul>
-<p>从业务角度来说，引起一个接口or类发生变化的原因，应该是一个有限制的单纯的最小业务单元；</p>
-<p>比方说：项目设计开发中，我们肯定都接触过用户、角色、部门等管理模块（RBAC模型，Role-Based Access Control,基于角色的的访问控制，通过角色来完成用户权限的授予和取消，使动作主体用户与资源的行为即权限分离开）。针对用户管理、用户信息修改、用户增加部门、增加角色等信息和行为，我们为其定义一个接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IUserInfo</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">setUserName</span><span class="params">(String userName)</span></span>;</span><br><span class="line">  <span class="function">String <span class="title">getUserName</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span></span>;</span><br><span class="line">  <span class="function">String <span class="title">getPassword</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">changePassword</span><span class="params">(String oldPassword)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">deleteUser</span><span class="params">(String userName)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">addOrg</span><span class="params">(String orgName)</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">addRole</span><span class="params">(String roleId)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个接口设计有没有问题呢？<br>当然有，用户的属性和行为都挤压在了一个接口中，容易造成混乱。<br><!-- end --></p>
+<p><strong><em>单一职责原则提出了一个编写程序的标准，用“职责”或“变化原因”来衡量接口或 类设计得是否优良，但是“职责”和“变化原因”都是不可度量的，因项目而异，因环境而异。具体业务需求具体分析，灵活转变。</em></strong></p>
+<h2 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h2><h2 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h2><h2 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h2><h2 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h2><h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><!-- end -->
 <font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>
 
       
@@ -486,7 +501,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -497,7 +512,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -537,7 +552,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单一职责原则"><span class="nav-number">1.</span> <span class="nav-text">单一职责原则</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设计原则"><span class="nav-number">1.</span> <span class="nav-text">设计原则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单一职责原则"><span class="nav-number">1.1.</span> <span class="nav-text">单一职责原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#里氏替换原则"><span class="nav-number">1.2.</span> <span class="nav-text">里氏替换原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖倒置原则"><span class="nav-number">1.3.</span> <span class="nav-text">依赖倒置原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口隔离原则"><span class="nav-number">1.4.</span> <span class="nav-text">接口隔离原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迪米特法则"><span class="nav-number">1.5.</span> <span class="nav-text">迪米特法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开闭原则"><span class="nav-number">1.6.</span> <span class="nav-text">开闭原则</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -579,8 +594,27 @@
 
 
 
-
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
 
 
 

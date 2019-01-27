@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="T-SPACE">
 <meta property="og:description" content="Git分布式版本控制系统其版本管理的思想，类比树枝，有树干，树干可以衍生出多个枝干，每个枝干可以是不同的版本主题，而枝干内容也可以汇流到主树干中。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-20T15:35:19.000Z">
+<meta property="og:updated_time" content="2019-01-21T15:45:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 常用命令">
 <meta name="twitter:description" content="Git分布式版本控制系统其版本管理的思想，类比树枝，有树干，树干可以衍生出多个枝干，每个枝干可以是不同的版本主题，而枝干内容也可以汇流到主树干中。">
@@ -316,6 +316,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
           
 
@@ -359,7 +364,7 @@
 </li>
 <li><p>后面跟 -b 分支名xxx ，创建名为xxx的分支，并且切换到xxx分支</p>
 </li>
-<li><p>后面跟 – <filename> 还原对filename的文件的修改</filename></p>
+<li><p>后面跟 – [file] 还原对filename的文件的修改</p>
 </li>
 </ul>
 <h3 id="git-add-filename"><a href="#git-add-filename" class="headerlink" title="git add [filename]"></a>git add [filename]</h3><ul>
@@ -391,8 +396,10 @@
 <li>保存当前分支的修改内容到工作区,一个栈内</li>
 <li>后面跟 pop ，将工作区最上层的保存的状态（修改内容）同步到当前分支</li>
 <li>后面跟 list ，将保存的栈内容罗列出来</li>
+<li>后面跟 apply [commitId] 恢复指定id记录的状态</li>
+<li>后面跟 drop [commitId] 删除指定id的状态记录</li>
 </ul>
-<h3 id="git-cherry-pick-options-commitId"><a href="#git-cherry-pick-options-commitId" class="headerlink" title="git cherry-pick [options] commitId"></a>git cherry-pick [options] commitId</h3><ul>
+<h3 id="git-cherry-pick-options-commitId"><a href="#git-cherry-pick-options-commitId" class="headerlink" title="git cherry-pick [options] [commitId]"></a>git cherry-pick [options] [commitId]</h3><ul>
 <li><p>git cherry-pick commitid 把a分支提交的一个commitId内容，提交到b分支；</p>
 </li>
 <li><p>常用options:<br>  –quit                退出当前的chery-pick序列;<br>  –continue            继续当前的chery-pick序列;<br>  –abort               取消当前的chery-pick序列，恢复当前分支;<br>  -n, –no-commit       不自动提交;<br>  -e, –edit            编辑提交信息;</p>
@@ -526,7 +533,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -537,7 +544,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -577,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git分布式版本控制系统"><span class="nav-number">1.</span> <span class="nav-text">Git分布式版本控制系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-init"><span class="nav-number">2.1.</span> <span class="nav-text">git init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-config-–global-user-name-“username”"><span class="nav-number">2.2.</span> <span class="nav-text">git config –global user.name “username”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-config-–global-user-email-“useremail”"><span class="nav-number">2.3.</span> <span class="nav-text">git config –global user.email “useremail”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-clone-url"><span class="nav-number">2.4.</span> <span class="nav-text">git clone url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-status"><span class="nav-number">2.5.</span> <span class="nav-text">git status</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch"><span class="nav-number">2.6.</span> <span class="nav-text">git branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-check"><span class="nav-number">2.7.</span> <span class="nav-text">git check</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-add-filename"><span class="nav-number">2.8.</span> <span class="nav-text">git add [filename]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-commit-m-“备注”"><span class="nav-number">2.9.</span> <span class="nav-text">git commit -m “备注”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-log"><span class="nav-number">2.10.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-reflog"><span class="nav-number">2.11.</span> <span class="nav-text">git reflog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-reset-–hrad-commitId"><span class="nav-number">2.12.</span> <span class="nav-text">git reset –hrad commitId</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-fetch"><span class="nav-number">2.13.</span> <span class="nav-text">git fetch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-pull-origin-xxx"><span class="nav-number">2.14.</span> <span class="nav-text">git pull origin xxx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-push-origin-分支名xxx"><span class="nav-number">2.15.</span> <span class="nav-text">git push origin 分支名xxx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-stash"><span class="nav-number">2.16.</span> <span class="nav-text">git stash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-cherry-pick-options-commitId"><span class="nav-number">2.17.</span> <span class="nav-text">git cherry-pick [options] commitId</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git分布式版本控制系统"><span class="nav-number">1.</span> <span class="nav-text">Git分布式版本控制系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-init"><span class="nav-number">2.1.</span> <span class="nav-text">git init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-config-–global-user-name-“username”"><span class="nav-number">2.2.</span> <span class="nav-text">git config –global user.name “username”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-config-–global-user-email-“useremail”"><span class="nav-number">2.3.</span> <span class="nav-text">git config –global user.email “useremail”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-clone-url"><span class="nav-number">2.4.</span> <span class="nav-text">git clone url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-status"><span class="nav-number">2.5.</span> <span class="nav-text">git status</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch"><span class="nav-number">2.6.</span> <span class="nav-text">git branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-check"><span class="nav-number">2.7.</span> <span class="nav-text">git check</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-add-filename"><span class="nav-number">2.8.</span> <span class="nav-text">git add [filename]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-commit-m-“备注”"><span class="nav-number">2.9.</span> <span class="nav-text">git commit -m “备注”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-log"><span class="nav-number">2.10.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-reflog"><span class="nav-number">2.11.</span> <span class="nav-text">git reflog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-reset-–hrad-commitId"><span class="nav-number">2.12.</span> <span class="nav-text">git reset –hrad commitId</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-fetch"><span class="nav-number">2.13.</span> <span class="nav-text">git fetch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-pull-origin-xxx"><span class="nav-number">2.14.</span> <span class="nav-text">git pull origin xxx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-push-origin-分支名xxx"><span class="nav-number">2.15.</span> <span class="nav-text">git push origin 分支名xxx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-stash"><span class="nav-number">2.16.</span> <span class="nav-text">git stash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-cherry-pick-options-commitId"><span class="nav-number">2.17.</span> <span class="nav-text">git cherry-pick [options] [commitId]</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -619,8 +626,27 @@
 
 
 
-
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
 
 
 
