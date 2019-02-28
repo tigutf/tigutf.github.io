@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tigutf.github.io/"/>
-  <updated>2019-01-21T15:45:45.000Z</updated>
+  <updated>2019-02-28T14:07:35.000Z</updated>
   <id>http://tigutf.github.io/</id>
   
   <author>
@@ -17,24 +17,44 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Git 常用命令</title>
-    <link href="http://tigutf.github.io/2019/01/20/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://tigutf.github.io/2019/01/20/Git常用命令/</id>
-    <published>2019-01-20T15:35:19.000Z</published>
-    <updated>2019-01-21T15:45:45.000Z</updated>
+    <title>linux常用命令</title>
+    <link href="http://tigutf.github.io/2019/02/28/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://tigutf.github.io/2019/02/28/linux常用命令/</id>
+    <published>2019-02-28T14:07:35.000Z</published>
+    <updated>2019-02-28T14:07:35.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Git分布式版本控制系统"><a href="#Git分布式版本控制系统" class="headerlink" title="Git分布式版本控制系统"></a>Git分布式版本控制系统</h2><p>其版本管理的思想，类比树枝，有树干，树干可以衍生出多个枝干，每个枝干可以是不同的版本主题，而枝干内容也可以汇流到主树干中。<br><a id="more"></a></p><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>项目工作中常用命令</p><h3 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h3><ul><li>初始化一个项目为git项目，在执行命令的目录下会生成.git隐藏的配置管理文件夹</li></ul><h3 id="git-config-–global-user-name-“username”"><a href="#git-config-–global-user-name-“username”" class="headerlink" title="git config –global user.name “username”"></a>git config –global user.name “username”</h3><ul><li>设置用户名</li></ul><h3 id="git-config-–global-user-email-“useremail”"><a href="#git-config-–global-user-email-“useremail”" class="headerlink" title="git config –global user.email “useremail”"></a>git config –global user.email “useremail”</h3><ul><li>设置邮箱地址(建议用注册giuhub的邮箱)</li></ul><h3 id="git-clone-url"><a href="#git-clone-url" class="headerlink" title="git clone url"></a>git clone url</h3><ul><li>将已知项目仓库克隆到本地</li></ul><h3 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h3><ul><li>查看当前项目分支的状态（有没有修改新增的文件内容）</li></ul><h3 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h3><ul><li>显示分支列表，同时确认当前所在的分支</li></ul><h3 id="git-check"><a href="#git-check" class="headerlink" title="git check"></a>git check</h3><ul><li><p>后面跟分支名，则是切换到指定分支</p></li><li><p>后面跟 -b 分支名xxx ，创建名为xxx的分支，并且切换到xxx分支</p></li><li><p>后面跟 – [file] 还原对filename的文件的修改</p></li></ul><h3 id="git-add-filename"><a href="#git-add-filename" class="headerlink" title="git add [filename]"></a>git add [filename]</h3><ul><li>添加修改或新增的文件到暂存区，为提交做准备</li><li>后面跟 . 表示添加全部文件</li></ul><h3 id="git-commit-m-“备注”"><a href="#git-commit-m-“备注”" class="headerlink" title="git commit -m “备注”"></a>git commit -m “备注”</h3><ul><li>提交暂存区的内容到当前分支</li></ul><h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h3><ul><li>查看提交日志</li></ul><h3 id="git-reflog"><a href="#git-reflog" class="headerlink" title="git reflog"></a>git reflog</h3><ul><li>查看仓库的操作日志</li></ul><h3 id="git-reset-–hrad-commitId"><a href="#git-reset-–hrad-commitId" class="headerlink" title="git reset –hrad commitId"></a>git reset –hrad commitId</h3><ul><li>回溯到指定版本状态，每次commit之后都会生成一个对应的提交ID作为一个记号，制定某个记号，即可回滚到那个记号对应的状态。</li></ul><h3 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h3><ul><li>抓取同步远程分支的分支信息</li></ul><h3 id="git-pull-origin-xxx"><a href="#git-pull-origin-xxx" class="headerlink" title="git pull origin xxx"></a>git pull origin xxx</h3><ul><li>拉去远程分支xxx的内容到当前分支</li></ul><h3 id="git-push-origin-分支名xxx"><a href="#git-push-origin-分支名xxx" class="headerlink" title="git push origin 分支名xxx"></a>git push origin 分支名xxx</h3><ul><li>推送当前分支内容状态到远程分支xxx</li></ul><h3 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h3><ul><li>保存当前分支的修改内容到工作区,一个栈内</li><li>后面跟 pop ，将工作区最上层的保存的状态（修改内容）同步到当前分支</li><li>后面跟 list ，将保存的栈内容罗列出来</li><li>后面跟 apply [commitId] 恢复指定id记录的状态</li><li>后面跟 drop [commitId] 删除指定id的状态记录</li></ul><h3 id="git-cherry-pick-options-commitId"><a href="#git-cherry-pick-options-commitId" class="headerlink" title="git cherry-pick [options] [commitId]"></a>git cherry-pick [options] [commitId]</h3><ul><li><p>git cherry-pick commitid 把a分支提交的一个commitId内容，提交到b分支；</p></li><li><p>常用options:<br>  –quit                退出当前的chery-pick序列;<br>  –continue            继续当前的chery-pick序列;<br>  –abort               取消当前的chery-pick序列，恢复当前分支;<br>  -n, –no-commit       不自动提交;<br>  -e, –edit            编辑提交信息;</p></li></ul><!-- end --><font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>]]></content>
+    <content type="html"><![CDATA[<p>工作中常用命令汇总</p><a id="more"></a><h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><ol><li><p>ls  list 列举</p><blockquote><p>-a 列出目录所有文件，包含隐藏文件 <br><br>-l 列出文件并包含文件的权限、所有者、文件大小等详细信息 <br><br>ll 等价于 ls -l</p></blockquote></li><li><p>cd change Directory切换目录</p><blockquote><p>cd /  root目录 <br><br>cd ~  home目录 <br><br>cd .. 返回上一层 <br><br>cd -  进入上一次工作路径 <br></p></blockquote></li><li>pwd 查看当前工作目录路径</li><li>mkdir 创建文件夹<blockquote><p>mkdir -p 路径名 此时若路径中的某些目录尚不存在,加上此选项后,系统将自动建立好那些尚不在的目录,即一次可以建立多个目录;</p></blockquote></li><li><p>rm [选项] 文件 删除一个目录中的一个或多个文件或目录，如果没有使用 -r 选项，则rm不会删除目录。如果使用rm来删除文件，通常仍可以将该文件恢复原状</p><blockquote><p>rm -i *.log 删除任何.log文件；删除前逐一询问确认； <br><br>rm -rf test 删除test子目录及其目录中所有文件,并且不用一一确认；</p></blockquote></li><li><p>rmdir 删除目录</p></li><li><p>mv 移动文件或修改文件名，根据第二参数类型决定</p><blockquote><p>mv test.log test1.txt 重命名为test1.txt  <br><br>mv test1.log test2.log /dir 移动两个文件到dir目录</p></blockquote></li><li><p>cp 复制</p><blockquote><p>-i 提示，提示是否覆盖 <br><br>-r 复制目录及目录内所有项目 <br><br>cp -ai test.txt /test/dist 复制test.txt到/test/dist目录下,保持源文件时间</p></blockquote></li><li>cat ：一次显示整个文件；从键盘创建一个文件 cat &gt; filename； 将几个文件合并成一个文件。<blockquote><p>cat -n a.log b.log  把a.log的文件内容加上行号后输入b.log这个文件里</p></blockquote></li><li>more and less 显示内容<blockquote><p>more +3 text.txt 显示文件中从第3行起的内容 <br><br>ls -l | more -5 所列出文件目录详细信息，借助管道使每次显示5行,按空格键显示下5行 <br><br>ps -aux | less -N ps查看进程信息并通过less分页显示,显示行数</p></blockquote></li><li><p>tail 显示指定文件末尾内容，常用查看日志</p><blockquote><p> tail -100 -f -n test.log 从后到前读取100行，且循环读取，显示行数</p></blockquote></li><li><p>whereis 查看文件位置，用于程序名的搜索</p></li><li><p>locate 通过搜寻系统内建文档数据库达到快速找到档案</p><blockquote><p>-r 使用正则运算式做为寻找条件 <br><br>locate /etc/sh 搜索etc目录下所有以sh开头的文件</p></blockquote></li><li><p>find 用于在文件树中查找文件</p></li><li>chmod 修改权限<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">权限代号：</span><br><span class="line">         r ：读权限，用数字4表示</span><br><span class="line">         w ：写权限，用数字2表示</span><br><span class="line">         x ：执行权限，用数字1表示</span><br><span class="line">         - ：删除权限，用数字0表示</span><br><span class="line">         s ：特殊权限</span><br><span class="line">权限范围：</span><br><span class="line">        u ：目录或者文件的当前的用户</span><br><span class="line">        g ：目录或者文件的当前的群组</span><br><span class="line">        o ：除了目录或者文件的当前用户或群组之外的用户或者群组</span><br><span class="line">        a ：所有的用户及群组</span><br></pre></td></tr></table></figure></li></ol><blockquote><p>-rw-r–r– 10个位置，第一个字符表示文件类型，-表示非目录，d表示目录；从第二个字符开始到第十个共9个字符，3个字符一组，分别表示了3组用户对文件或者目录的权限。权限字符用横线代表空许可，r代表只读，w代表写，x代表可执行。 <br><br>-c 当发生改变时，报告处理信息 <br><br>  -R 处理指定目录以及其子目录下所有文件<br>  chmod a+x t.log 增加文件t.log所有用户可执行权限 <br><br>  chmod 751 t.log -c 给file的属主分配读、写、执行(7)的权限，给file的所在组分配读、执行(5)的权限，给其他用户分配执行(1)的权限</p></blockquote><ol><li><p>chown 将指定文件的拥有者改为指定的用户或组</p><blockquote><p>chown -c mail:mail test.log 改变拥有者和群组,并显示改变信息</p></blockquote></li><li><p>grep 文本搜索命令</p><blockquote><p>grep -aR -100 “abc” test.log 递归循环查找文件中包含关键字的内容，显示匹配字符后的100行</p></blockquote></li><li><p>ps 查看当前运行的进程状态</p><blockquote><p>ps -ef 显示当前所有进程环境变量及进程间关系</p></blockquote></li><li><p>kill 杀死进程</p></li><li>free 显示系统内存使用情况</li><li>curl 链接调用，http命令行工具<blockquote><p>curl -o linux.html <a href="http://www.linux.com" target="_blank" rel="noopener">http://www.linux.com</a> 保存网页 <br><br>curl -O <a href="http://www.baidu.com/page/2/" target="_blank" rel="noopener">http://www.baidu.com/page/2/</a> -O <a href="http://www.baidu.com/page/3/" target="_blank" rel="noopener">http://www.baidu.com/page/3/</a> 保存链接网页的文件 <br><br>curl -H 自定义 header -A 自定义User-Agent用户代理 使用 -d 发送 POST 请求。</p></blockquote></li></ol><!-- end --><font color="blue" face="楷体"><br>好好学习天天向上~<br>分享、交流、共同进步~<br></font>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;Git分布式版本控制系统&quot;&gt;&lt;a href=&quot;#Git分布式版本控制系统&quot; class=&quot;headerlink&quot; title=&quot;Git分布式版本控制系统&quot;&gt;&lt;/a&gt;Git分布式版本控制系统&lt;/h2&gt;&lt;p&gt;其版本管理的思想，类比树枝，有树干，树干可以衍生出多个枝干，每个枝干可以是不同的版本主题，而枝干内容也可以汇流到主树干中。&lt;br&gt;
+      &lt;p&gt;工作中常用命令汇总&lt;/p&gt;
     
     </summary>
     
-      <category term="Github" scheme="http://tigutf.github.io/categories/Github/"/>
+      <category term="linux" scheme="http://tigutf.github.io/categories/linux/"/>
     
     
-      <category term="git" scheme="http://tigutf.github.io/tags/git/"/>
+      <category term="linux" scheme="http://tigutf.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>新年2019篇</title>
+    <link href="http://tigutf.github.io/2019/02/05/%E6%96%B0%E5%B9%B42019%E7%AF%87/"/>
+    <id>http://tigutf.github.io/2019/02/05/新年2019篇/</id>
+    <published>2019-02-05T09:12:41.000Z</published>
+    <updated>2019-02-05T09:12:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>年味似乎越来越淡，但时间的路上却越来越多滋味。<br><a id="more"></a></p><ul><li><p>2019 新的一年，老了一岁；</p></li><li><p>石座前，门栏外，柴火潇潇崔汗；</p></li><li><p>屋檐后，窗帘内，茶水噜噜解醉。</p></li></ul><!-- end --><font color="blue" face="楷体"><br>好好学习天天向上~<br>分享、交流、共同进步~<br></font>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;年味似乎越来越淡，但时间的路上却越来越多滋味。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="散谈" scheme="http://tigutf.github.io/categories/%E6%95%A3%E8%B0%88/"/>
+    
     
   </entry>
   
@@ -55,6 +75,28 @@
     
       <category term="读书" scheme="http://tigutf.github.io/categories/%E8%AF%BB%E4%B9%A6/"/>
     
+    
+  </entry>
+  
+  <entry>
+    <title>Git 常用命令</title>
+    <link href="http://tigutf.github.io/2019/01/20/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://tigutf.github.io/2019/01/20/Git常用命令/</id>
+    <published>2019-01-20T15:35:19.000Z</published>
+    <updated>2019-01-21T15:45:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Git分布式版本控制系统"><a href="#Git分布式版本控制系统" class="headerlink" title="Git分布式版本控制系统"></a>Git分布式版本控制系统</h2><p>其版本管理的思想，类比树枝，有树干，树干可以衍生出多个枝干，每个枝干可以是不同的版本主题，而枝干内容也可以汇流到主树干中。<br><a id="more"></a></p><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>项目工作中常用命令</p><h3 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h3><ul><li>初始化一个项目为git项目，在执行命令的目录下会生成.git隐藏的配置管理文件夹</li></ul><h3 id="git-config-–global-user-name-“username”"><a href="#git-config-–global-user-name-“username”" class="headerlink" title="git config –global user.name “username”"></a>git config –global user.name “username”</h3><ul><li>设置用户名</li></ul><h3 id="git-config-–global-user-email-“useremail”"><a href="#git-config-–global-user-email-“useremail”" class="headerlink" title="git config –global user.email “useremail”"></a>git config –global user.email “useremail”</h3><ul><li>设置邮箱地址(建议用注册giuhub的邮箱)</li></ul><h3 id="git-clone-url"><a href="#git-clone-url" class="headerlink" title="git clone url"></a>git clone url</h3><ul><li>将已知项目仓库克隆到本地</li></ul><h3 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h3><ul><li>查看当前项目分支的状态（有没有修改新增的文件内容）</li></ul><h3 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h3><ul><li>显示分支列表，同时确认当前所在的分支</li></ul><h3 id="git-check"><a href="#git-check" class="headerlink" title="git check"></a>git check</h3><ul><li><p>后面跟分支名，则是切换到指定分支</p></li><li><p>后面跟 -b 分支名xxx ，创建名为xxx的分支，并且切换到xxx分支</p></li><li><p>后面跟 – [file] 还原对filename的文件的修改</p></li></ul><h3 id="git-add-filename"><a href="#git-add-filename" class="headerlink" title="git add [filename]"></a>git add [filename]</h3><ul><li>添加修改或新增的文件到暂存区，为提交做准备</li><li>后面跟 . 表示添加全部文件</li></ul><h3 id="git-commit-m-“备注”"><a href="#git-commit-m-“备注”" class="headerlink" title="git commit -m “备注”"></a>git commit -m “备注”</h3><ul><li>提交暂存区的内容到当前分支</li></ul><h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h3><ul><li>查看提交日志</li></ul><h3 id="git-reflog"><a href="#git-reflog" class="headerlink" title="git reflog"></a>git reflog</h3><ul><li>查看仓库的操作日志</li></ul><h3 id="git-reset-–hrad-commitId"><a href="#git-reset-–hrad-commitId" class="headerlink" title="git reset –hrad commitId"></a>git reset –hrad commitId</h3><ul><li>回溯到指定版本状态，每次commit之后都会生成一个对应的提交ID作为一个记号，制定某个记号，即可回滚到那个记号对应的状态。</li></ul><h3 id="git-fetch"><a href="#git-fetch" class="headerlink" title="git fetch"></a>git fetch</h3><ul><li>抓取同步远程分支的分支信息</li></ul><h3 id="git-pull-origin-xxx"><a href="#git-pull-origin-xxx" class="headerlink" title="git pull origin xxx"></a>git pull origin xxx</h3><ul><li>拉去远程分支xxx的内容到当前分支</li></ul><h3 id="git-push-origin-分支名xxx"><a href="#git-push-origin-分支名xxx" class="headerlink" title="git push origin 分支名xxx"></a>git push origin 分支名xxx</h3><ul><li>推送当前分支内容状态到远程分支xxx</li></ul><h3 id="git-stash"><a href="#git-stash" class="headerlink" title="git stash"></a>git stash</h3><ul><li>保存当前分支的修改内容到工作区,一个栈内</li><li>后面跟 pop ，将工作区最上层的保存的状态（修改内容）同步到当前分支</li><li>后面跟 list ，将保存的栈内容罗列出来</li><li>后面跟 apply [commitId] 恢复指定id记录的状态</li><li>后面跟 drop [commitId] 删除指定id的状态记录</li></ul><h3 id="git-cherry-pick-options-commitId"><a href="#git-cherry-pick-options-commitId" class="headerlink" title="git cherry-pick [options] [commitId]"></a>git cherry-pick [options] [commitId]</h3><ul><li><p>git cherry-pick commitid 把a分支提交的一个commitId内容，提交到b分支；</p></li><li><p>常用options:<br>  –quit                退出当前的chery-pick序列;<br>  –continue            继续当前的chery-pick序列;<br>  –abort               取消当前的chery-pick序列，恢复当前分支;<br>  -n, –no-commit       不自动提交;<br>  -e, –edit            编辑提交信息;</p></li></ul><!-- end --><font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Git分布式版本控制系统&quot;&gt;&lt;a href=&quot;#Git分布式版本控制系统&quot; class=&quot;headerlink&quot; title=&quot;Git分布式版本控制系统&quot;&gt;&lt;/a&gt;Git分布式版本控制系统&lt;/h2&gt;&lt;p&gt;其版本管理的思想，类比树枝，有树干，树干可以衍生出多个枝干，每个枝干可以是不同的版本主题，而枝干内容也可以汇流到主树干中。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Github" scheme="http://tigutf.github.io/categories/Github/"/>
+    
+    
+      <category term="git" scheme="http://tigutf.github.io/tags/git/"/>
     
   </entry>
   
@@ -170,15 +212,15 @@
     <link href="http://tigutf.github.io/2018/11/20/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"/>
     <id>http://tigutf.github.io/2018/11/20/设计原则/</id>
     <published>2018-11-20T15:22:48.000Z</published>
-    <updated>2019-01-21T17:25:14.311Z</updated>
+    <updated>2019-02-01T17:41:54.444Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to my T-SPACE~</p><blockquote><p>设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习</p></blockquote><a id="more"></a><h1 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h1><p>有这么一段概括:</p><ol><li>单一职责原则告诉我们实现类、接口要职责单一；</li><li>里氏替换原则告诉我们不要破坏继承体系；</li><li>依赖倒置原则告诉我们要面向接口编程；</li><li>接口隔离原则告诉我们在设计接口的时候要精简单一；</li><li>迪米特法则告诉我们要降低耦合；</li><li>而开闭原则是总纲，它告诉我们要对扩展开放，对修改关闭。</li></ol><h2 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h2><blockquote><p>Single Responsibility Principle, 简称SRP</p></blockquote><p><strong>单一职责原则的定义是:应该有且仅有一个原因引起类的变更；</strong><br>从业务角度来说，引起一个接口or类发生变化的原因，应该是一个有限制的单纯的最小业务单元；</p><blockquote><p>例子1：RBAC模型，Role-Based Access Control,基于角色的的访问控制。系统用户信息定义是我们总遇到的业务之一。用户信息接口，若我们直接定义用户属性（姓名、密码、所在部门）+ 用户行为（修改姓名、修改密码等）在一个接口中，该接口同时承担用户属性信息和用户行为的职责，这是容易引起混淆的，这不符合单一职责原则的。拆分为两个接口，不同场景下使用不同的接口（信息的查询和操作分开），各司其职，一目了然。</p><p>例子2：电话通话的用例定义：拨号、通话、回应、挂机。一个接口IMobile将电话通话全涵盖。看似可以，但包含两层职责：a.拨号和挂断，这是通话协议管理; b.通话回应则是数据传送。实际业务，这两层职责相关联，若两个接口两个类，一个电话要两个类来组合定义，强耦合关系，增加了类的复杂度，这似乎也不太合理。换种角度，两种职责，定义两个接口，由一个电话类实现这两个接口，将两个职责融合在一个类中。对外发布仅仅是接口，而非实现类，这样也体现了接口的单一职责。</p></blockquote><p>通过上面的例子，我们来总结一下单一职责原则有什么好处：</p><ul><li>类的复杂性降低，实现什么职责都有清晰明确的定义；</li><li>可读性提高，复杂性降低，那当然可读性提高了；</li><li>可维护性提高，可读性提高，那当然更容易维护了；</li><li>变更引起的风险降低，变更是必不可少的，如果接口的单一职责做得好，一个接口修改只对相应的实现类有影响，对其他的接口无影响，这对系统的扩展性、维护性都有非常大的帮助。</li></ul><p><strong><em>单一职责原则提出了一个编写程序的标准，用“职责”或“变化原因”来衡量接口或 类设计得是否优良，但是“职责”和“变化原因”都是不可度量的，因项目而异，因环境而异。具体业务需求具体分析，灵活转变。</em></strong></p><h2 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h2><h2 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h2><h2 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h2><h2 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h2><h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><!-- end --><font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>]]></content>
+    <content type="html"><![CDATA[<p>踉踉跄跄coding几年，懂得coding，知道OOD，才明白更应该去理解面向对象设计的原则。</p><blockquote><p>设计模式，是前辈大神们经过实践而总结出来的经验。以设计原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~代码不是一个人的，让多数人都能去读懂和理解，才是好代码</p></blockquote><a id="more"></a><h1 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h1><p>有这么一段概括:</p><ol><li>单一职责原则告诉我们实现类、接口要职责单一；</li><li>里氏替换原则告诉我们不要破坏继承体系；</li><li>依赖倒置原则告诉我们要面向接口编程；</li><li>接口隔离原则告诉我们在设计接口的时候要精简单一；</li><li>迪米特法则告诉我们要降低耦合；</li><li>而开闭原则是总纲，它告诉我们要对扩展开放，对修改关闭。</li></ol><h2 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h2><blockquote><p>Single Responsibility Principle, 简称SRP</p></blockquote><p><strong>单一职责原则的定义是:应该有且仅有一个原因引起类的变更；</strong><br>从业务角度来说，引起一个接口or类发生变化的原因，应该是一个有限制的单纯的最小业务单元；</p><blockquote><p>例子1：RBAC模型，Role-Based Access Control,基于角色的的访问控制。系统用户信息定义是我们总遇到的业务之一。用户信息接口，若我们直接定义用户属性（姓名、密码、所在部门）+ 用户行为（修改姓名、修改密码等）在一个接口中，该接口同时承担用户属性信息和用户行为的职责，这是容易引起混淆的，这不符合单一职责原则的。拆分为两个接口，不同场景下使用不同的接口（信息的查询和操作分开），各司其职，一目了然。</p><p>例子2：电话通话的用例定义：拨号、通话、回应、挂机。一个接口IMobile将电话通话全涵盖。看似可以，但包含两层职责：a.拨号和挂断，这是通话协议管理; b.通话回应则是数据传送。实际业务，这两层职责相关联，若两个接口两个类，一个电话要两个类来组合定义，强耦合关系，增加了类的复杂度，这似乎也不太合理。换种角度，两种职责，定义两个接口，由一个电话类实现这两个接口，将两个职责融合在一个类中。对外发布仅仅是接口，而非实现类，这样也体现了接口的单一职责。</p></blockquote><p>通过上面的例子，我们来总结一下单一职责原则有什么好处：</p><ul><li>类的复杂性降低，实现什么职责都有清晰明确的定义；</li><li>可读性提高，复杂性降低，那当然可读性提高了；</li><li>可维护性提高，可读性提高，那当然更容易维护了；</li><li>变更引起的风险降低，变更是必不可少的，如果接口的单一职责做得好，一个接口修改只对相应的实现类有影响，对其他的接口无影响，这对系统的扩展性、维护性都有非常大的帮助。</li></ul><p><strong><em>单一职责原则提出了一个编写程序的标准，用“职责”或“变化原因”来衡量接口或 类设计得是否优良，但是“职责”和“变化原因”都是不可度量的，因项目而异，因环境而异。具体业务需求具体分析，灵活转变。</em></strong></p><h2 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h2><blockquote><p>Liskov Substitution Principle，LSP</p></blockquote><ul><li><p>第一种定义，也是最正宗的定义：If for each object o1 of type S there is an object o2 of type T such that for all programs P defined in terms of T,the behavior of P is unchanged when o1 is substituted for o2 then S is a subtype of T.（如果对每一个类型为S的对象o1，都有类型为T的对 象o2，使得以T定义的所有程序P在所有的对象o1都代换成o2时，程序P的行为没有发生变化，那么类型S是类型T的子类型。）</p></li><li><p>第二种定义：Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.（所有引用基类的地方必须能透明地使用其子类的<br>对象。）</p></li></ul><h2 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h2><h2 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h2><h2 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h2><h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><!-- end --><font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to my T-SPACE~&lt;/p&gt;
+      &lt;p&gt;踉踉跄跄coding几年，懂得coding，知道OOD，才明白更应该去理解面向对象设计的原则。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习&lt;/p&gt;
+&lt;p&gt;设计模式，是前辈大神们经过实践而总结出来的经验。以设计原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~代码不是一个人的，让多数人都能去读懂和理解，才是好代码&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
@@ -186,7 +228,7 @@
       <category term="Design pattern" scheme="http://tigutf.github.io/categories/Design-pattern/"/>
     
     
-      <category term="设计模式|SRP" scheme="http://tigutf.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-SRP/"/>
+      <category term="设计原则|面向对象" scheme="http://tigutf.github.io/tags/%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="设计模式|SRP," />
+  <meta name="keywords" content="设计原则|面向对象," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="Welcome to my T-SPACE~  设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习">
-<meta name="keywords" content="设计模式|SRP">
+<meta name="description" content="踉踉跄跄coding几年，懂得coding，知道OOD，才明白更应该去理解面向对象设计的原则。  设计模式，是前辈大神们经过实践而总结出来的经验。以设计原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~代码不是一个人的，让多数人都能去读懂和理解，才是好代码">
+<meta name="keywords" content="设计原则|面向对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式学习一">
 <meta property="og:url" content="http://tigutf.github.io/2018/11/20/设计原则/index.html">
 <meta property="og:site_name" content="T-SPACE">
-<meta property="og:description" content="Welcome to my T-SPACE~  设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习">
+<meta property="og:description" content="踉踉跄跄coding几年，懂得coding，知道OOD，才明白更应该去理解面向对象设计的原则。  设计模式，是前辈大神们经过实践而总结出来的经验。以设计原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~代码不是一个人的，让多数人都能去读懂和理解，才是好代码">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-21T17:25:14.311Z">
+<meta property="og:updated_time" content="2019-02-01T17:41:54.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式学习一">
-<meta name="twitter:description" content="Welcome to my T-SPACE~  设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习">
+<meta name="twitter:description" content="踉踉跄跄coding几年，懂得coding，知道OOD，才明白更应该去理解面向对象设计的原则。  设计模式，是前辈大神们经过实践而总结出来的经验。以设计原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~代码不是一个人的，让多数人都能去读懂和理解，才是好代码">
 
 
 
@@ -360,9 +360,9 @@
       
 
       
-        <p>Welcome to my T-SPACE~</p>
+        <p>踉踉跄跄coding几年，懂得coding，知道OOD，才明白更应该去理解面向对象设计的原则。</p>
 <blockquote>
-<p>设计模式，是前辈大神们经过实践而总结出来的经验。以设计模式原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~好处多多，好好学习</p>
+<p>设计模式，是前辈大神们经过实践而总结出来的经验。以设计原则去设计编程，为的就是让代码更易于理解，保证代码的可靠性，确保系统项目的扩展性。~代码不是一个人的，让多数人都能去读懂和理解，才是好代码</p>
 </blockquote>
 <a id="more"></a>
 <h1 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h1><p>有这么一段概括:</p>
@@ -390,7 +390,16 @@
 <li>变更引起的风险降低，变更是必不可少的，如果接口的单一职责做得好，一个接口修改只对相应的实现类有影响，对其他的接口无影响，这对系统的扩展性、维护性都有非常大的帮助。</li>
 </ul>
 <p><strong><em>单一职责原则提出了一个编写程序的标准，用“职责”或“变化原因”来衡量接口或 类设计得是否优良，但是“职责”和“变化原因”都是不可度量的，因项目而异，因环境而异。具体业务需求具体分析，灵活转变。</em></strong></p>
-<h2 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h2><h2 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h2><h2 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h2><h2 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h2><h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><!-- end -->
+<h2 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h2><blockquote>
+<p>Liskov Substitution Principle，LSP</p>
+</blockquote>
+<ul>
+<li><p>第一种定义，也是最正宗的定义：If for each object o1 of type S there is an object o2 of type T such that for all programs P defined in terms of T,the behavior of P is unchanged when o1 is substituted for o2 then S is a subtype of T.（如果对每一个类型为S的对象o1，都有类型为T的对 象o2，使得以T定义的所有程序P在所有的对象o1都代换成o2时，程序P的行为没有发生变化，那么类型S是类型T的子类型。）</p>
+</li>
+<li><p>第二种定义：Functions that use pointers or references to base classes must be able to use objects of derived classes without knowing it.（所有引用基类的地方必须能透明地使用其子类的<br>对象。）</p>
+</li>
+</ul>
+<h2 id="依赖倒置原则"><a href="#依赖倒置原则" class="headerlink" title="依赖倒置原则"></a>依赖倒置原则</h2><h2 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h2><h2 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h2><h2 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h2><!-- end -->
 <font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>
 
       
@@ -418,7 +427,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/设计模式-SRP/" rel="tag"># 设计模式|SRP</a>
+            <a href="/tags/设计原则-面向对象/" rel="tag"># 设计原则|面向对象</a>
           
         </div>
       
@@ -524,7 +533,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -535,7 +544,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -546,7 +555,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
