@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="T-SPACE">
 <meta property="og:description" content="任务处理异常重试机制">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-23T15:57:33.000Z">
+<meta property="og:updated_time" content="2019-03-23T14:50:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cccp系统设计-异常重试-分片应用">
 <meta name="twitter:description" content="任务处理异常重试机制">
@@ -338,6 +338,21 @@
 
       
         <p>任务处理异常重试机制<br><a id="more"></a></p>
+<p>针对任务处理应用，若出现任务状态为-1（表示异常），或者状态为0（准备状态）且超出一定处理时长的，我们即认为该任务处理出现问题，需要重新尝试处理。</p>
+<p>定义一个异常处理模块，针对不同任务设置对应的定时任务——扫描数据库任务表，若扫描到以上状态的任务，则重新发到kafka队列上，等待任务的重试。</p>
+<p>通过以上方式保证了任务处理的健壮，然而也衍生了几个问题：</p>
+<ul>
+<li><p>生产集群环境下，多个异常处理的节点，同时扫描到对应的数据信息。</p>
+<blockquote>
+<p>为防止任务信息的重复扫描处理，利用redis添加一个分布式锁，得到锁的应用才进行数据扫描和处理，限制处理的数量，保证应用可及时处理。</p>
+</blockquote>
+</li>
+<li><p>某些任务由于延时未及时处理，而异常模块又推送相同任务过来，导致任务处理应用幂等性问题</p>
+<blockquote>
+<p>针对任务处理结果——我们会生成对应的消息数据，通过相关业务字段给消息数据添加了唯一索引，保证相同任务只生成一条消息；这样子避免了消息的重复生成，但都是依靠数据库抛出重复主键的异常来处理，对数据库形成了不小的压力，所以针对任务，当进入处理时，便给该任务在redis缓存里面安置一个处理中的标志，处理完成后删除，重复任务进入时，若在缓存中存在该标志则不再进行处理。</p>
+</blockquote>
+</li>
+</ul>
 <!-- end -->
 <font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>
 
@@ -383,8 +398,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/20/Git常用命令/" rel="prev" title="Git 常用命令">
-                Git 常用命令 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/20/关键对话/" rel="prev" title="关键对话">
+                关键对话 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -457,7 +472,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

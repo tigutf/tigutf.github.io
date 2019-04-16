@@ -81,21 +81,18 @@
 
 
 
-<meta name="description" content="Java原生流的方法进行的序列化Json序列化FastJson序列化Protobuff序列化">
+<meta name="description" content="Java原生流的方法进行的序列化类实现Serializable接口，标记该类对象可以被序列化。此时，Java序列化写入不仅是完整的类名，也包含整个类的定义，包含所有被引用的类，影响性能和效率；通过实现Externalizable接口，这是可能优化Java序列化的。实现此接口，避免写出整个类定义，只是类名被写入。它需要你实施readExternal和writeExternal方法方法的，所以需要做一">
 <meta name="keywords" content="Java|序列化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java序列化">
 <meta property="og:url" content="http://tigutf.github.io/2018/12/21/序列化1/index.html">
 <meta property="og:site_name" content="T-SPACE">
-<meta property="og:description" content="Java原生流的方法进行的序列化Json序列化FastJson序列化Protobuff序列化">
+<meta property="og:description" content="Java原生流的方法进行的序列化类实现Serializable接口，标记该类对象可以被序列化。此时，Java序列化写入不仅是完整的类名，也包含整个类的定义，包含所有被引用的类，影响性能和效率；通过实现Externalizable接口，这是可能优化Java序列化的。实现此接口，避免写出整个类定义，只是类名被写入。它需要你实施readExternal和writeExternal方法方法的，所以需要做一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://tigutf.github.io/2018/12/21/序列化1/URL1">
-<meta property="og:image" content="http://tigutf.github.io/2018/12/21/序列化1/URL2">
 <meta property="og:updated_time" content="2018-12-20T17:32:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java序列化">
-<meta name="twitter:description" content="Java原生流的方法进行的序列化Json序列化FastJson序列化Protobuff序列化">
-<meta name="twitter:image" content="http://tigutf.github.io/2018/12/21/序列化1/URL1">
+<meta name="twitter:description" content="Java原生流的方法进行的序列化类实现Serializable接口，标记该类对象可以被序列化。此时，Java序列化写入不仅是完整的类名，也包含整个类的定义，包含所有被引用的类，影响性能和效率；通过实现Externalizable接口，这是可能优化Java序列化的。实现此接口，避免写出整个类定义，只是类名被写入。它需要你实施readExternal和writeExternal方法方法的，所以需要做一">
 
 
 
@@ -361,33 +358,10 @@
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="/URL1" rel="gallery_cjsov4ojp000h64upd6ahhgj4"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="/URL1" itemprop="contentUrl"/>
-              </a>
-            
-          
-            
-              <a class="post-gallery-img fancybox"
-                 href="/URL2" rel="gallery_cjsov4ojp000h64upd6ahhgj4"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="/URL2" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
 
       
-        <h2 id="Java原生流的方法进行的序列化"><a href="#Java原生流的方法进行的序列化" class="headerlink" title="Java原生流的方法进行的序列化"></a>Java原生流的方法进行的序列化</h2><h2 id="Json序列化"><a href="#Json序列化" class="headerlink" title="Json序列化"></a>Json序列化</h2><h2 id="FastJson序列化"><a href="#FastJson序列化" class="headerlink" title="FastJson序列化"></a>FastJson序列化</h2><h2 id="Protobuff序列化"><a href="#Protobuff序列化" class="headerlink" title="Protobuff序列化"></a>Protobuff序列化</h2><a id="more"></a>
+        <h2 id="Java原生流的方法进行的序列化"><a href="#Java原生流的方法进行的序列化" class="headerlink" title="Java原生流的方法进行的序列化"></a>Java原生流的方法进行的序列化</h2><p>类实现Serializable接口，标记该类对象可以被序列化。此时，Java序列化写入不仅是完整的类名，也包含整个类的定义，包含所有被引用的类，影响性能和效率；<br>通过实现Externalizable接口，这是可能优化Java序列化的。实现此接口，避免写出整个类定义，只是类名被写入。它需要你实施readExternal和writeExternal方法方法的，所以需要做一些工作，但相比仅仅是实现Serializable更快，更高效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//对象转成字节码      </span><br><span class="line">ByteArrayOutputStream byteArrayOutputStream = new  ByteArrayOutputStream();</span><br><span class="line">ObjectOutputStream outputStream = new ObjectOutputStream(byteArrayOutputStream);</span><br><span class="line">outputStream.writeObject(GetUser());</span><br><span class="line">byte[] bytes = byteArrayOutputStream.toByteArray();</span><br><span class="line">outputStream.close();      //字节码转换成对象     </span><br><span class="line">ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);      </span><br><span class="line">ObjectInputStream inputStream = new ObjectInputStream(byteArrayInputStream);                       User result = (User) inputStream.readObject();      inputStream.close();</span><br></pre></td></tr></table></figure></p>
+<h2 id="Json序列化"><a href="#Json序列化" class="headerlink" title="Json序列化"></a>Json序列化</h2><h2 id="FastJson序列化"><a href="#FastJson序列化" class="headerlink" title="FastJson序列化"></a>FastJson序列化</h2><h2 id="Protobuff序列化"><a href="#Protobuff序列化" class="headerlink" title="Protobuff序列化"></a>Protobuff序列化</h2><a id="more"></a>
 <!-- end -->
 <font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>
 
@@ -522,7 +496,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
