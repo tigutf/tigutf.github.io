@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java | Map | 集合," />
+  <meta name="keywords" content="多线程," />
 
 
 
@@ -81,20 +81,18 @@
 
 
 
-<meta name="description" content="网上有很多对HashMap，HashTable几个集合类的对比与解说,看了下源码，记下笔记~">
-<meta name="keywords" content="Java | Map | 集合">
+<meta name="description" content="有一个超长的数组，现要对数组中数字进行求和，若使用多线程~">
+<meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读读HashMap(1)">
-<meta property="og:url" content="http://tigutf.github.io/2017/10/05/读读HashMap/index.html">
+<meta property="og:title" content="一道多线程练习题">
+<meta property="og:url" content="http://tigutf.github.io/2019/05/17/一道多线程练习题/index.html">
 <meta property="og:site_name" content="T-SPACE">
-<meta property="og:description" content="网上有很多对HashMap，HashTable几个集合类的对比与解说,看了下源码，记下笔记~">
+<meta property="og:description" content="有一个超长的数组，现要对数组中数字进行求和，若使用多线程~">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://tigutf.github.io/2017/10/05/读读HashMap/1543336152x2890174124.jpg">
-<meta property="og:updated_time" content="2019-01-27T17:20:02.524Z">
+<meta property="og:updated_time" content="2019-05-16T16:59:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读读HashMap(1)">
-<meta name="twitter:description" content="网上有很多对HashMap，HashTable几个集合类的对比与解说,看了下源码，记下笔记~">
-<meta name="twitter:image" content="http://tigutf.github.io/2017/10/05/读读HashMap/1543336152x2890174124.jpg">
+<meta name="twitter:title" content="一道多线程练习题">
+<meta name="twitter:description" content="有一个超长的数组，现要对数组中数字进行求和，若使用多线程~">
 
 
 
@@ -124,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://tigutf.github.io/2017/10/05/读读HashMap/"/>
+  <link rel="canonical" href="http://tigutf.github.io/2019/05/17/一道多线程练习题/"/>
 
 
 
 
 
-  <title>读读HashMap(1) | T-SPACE</title>
+  <title>一道多线程练习题 | T-SPACE</title>
   
 
 
@@ -268,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://tigutf.github.io/2017/10/05/读读HashMap/">
+    <link itemprop="mainEntityOfPage" href="http://tigutf.github.io/2019/05/17/一道多线程练习题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tigutf">
@@ -285,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">读读HashMap(1)</h1>
+          <h1 class="post-title" itemprop="name headline">一道多线程练习题</h1>
         
 
         <div class="post-meta">
@@ -297,8 +295,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-05T22:22:48+08:00">
-                2017-10-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-17T00:59:07+08:00">
+                2019-05-17
               </time>
             
 
@@ -362,36 +360,26 @@
       
 
       
-        <p>网上有很多对HashMap，HashTable几个集合类的对比与解说,看了下源码，记下笔记~</p>
-<a id="more"></a>
-<p>文章部分参考如下：</p>
-<ol>
-<li><a href="http://www.cnblogs.com/skywang12345/p/3310835.html" target="_blank" rel="noopener">http://www.cnblogs.com/skywang12345/p/3310835.html</a></li>
-<li><a href="https://www.cnblogs.com/chengxiao/p/6059914.html" target="_blank" rel="noopener">https://www.cnblogs.com/chengxiao/p/6059914.html</a></li>
-</ol>
-<h1 id="HashMap基础结构"><a href="#HashMap基础结构" class="headerlink" title="HashMap基础结构"></a>HashMap基础结构</h1><h2 id="HashMap的基础属性"><a href="#HashMap的基础属性" class="headerlink" title="HashMap的基础属性"></a>HashMap的基础属性</h2><p>HashMap 是一个散列表，它存储的内容是键值对(key-value)映射。<br>HashMap 继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable接口。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractMap</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">Map</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;, <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;</span><br></pre></td></tr></table></figure></p>
-<p>HashMap底层维护的是数组+链表(链地址法),它里面有两个参数：“初始容量” 和 “加载因子”。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//默认的初始化大小</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>; <span class="comment">// aka 16</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//最大的容量值，hashMap的容量大小必须是2的n次幂（2^30）</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXIMUM_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//负载因子</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75f</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * An empty table instance to share when the table is not inflated.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> Entry&lt;?,?&gt;[] EMPTY_TABLE = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * The table, resized as necessary. Length MUST Always be a power of two.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> Entry&lt;K,V&gt;[] table = (Entry&lt;K,V&gt;[]) EMPTY_TABLE;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>DEFAULT_INITIAL_CAPACITY 即初始容量，HashMap创建时的初始容量:1&lt;&lt;4 表示 二进制的01，向左偏移4位得到 10000，转换成十进制即为16</li>
-<li>DEFAULT_LOAD_FACTOR 即加载因子，是哈希表在其容量自动增加之前可以达到多满的一种尺度，默认为0.75。当哈希表中的条目数超出了加载因子与当前容量的乘积时，则要对该哈希表进行 rehash 操作（即重建内部数据结构），从而哈希表将具有大约两倍的桶数。</li>
-<li>HashMap的主干是一个Entry数组。Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。当发生哈希碰撞时（两个值计算得到的哈希值相同），则存储到对应下标的数组格子的链表里。<font color="#aa5500"><br>（哈希冲突的解决方案有多种:开放定址法（发生冲突，继续寻找下一块未被占用的存储地址），再散列函数法，链地址法，而HashMap即是采用了链地址法，也就是数组+链表的方式，）<br></font>
-
-</li>
+        <p>有一个超长的数组，现要对数组中数字进行求和，若使用多线程~<br><a id="more"></a></p>
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化一个超长的数组20亿（长度2的32次方最大了），随机插入数字</span></span><br><span class="line"><span class="meta">@Before</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    arr = <span class="keyword">new</span> ArrayList(<span class="number">200000000</span>);</span><br><span class="line">    Random random = <span class="keyword">new</span> Random(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">long</span> i=<span class="number">0</span>; i &lt; <span class="number">200000000</span>; i++)&#123;</span><br><span class="line">        arr.add(random.nextInt(<span class="number">10</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="一般解法"><a href="#一般解法" class="headerlink" title="一般解法"></a>一般解法</h3><blockquote>
+<p>主线程里面直接累加</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mainTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">long</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; <span class="number">200000000</span>; i++)&#123;</span><br><span class="line">        result += arr.get(i);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"result == "</span> + result);</span><br><span class="line">    System.out.println(<span class="string">"consume time : "</span> + (System.currentTimeMillis()-startTime));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果<br><br> result == 899943289<br><br> consume time : 187 ms</p>
+</blockquote>
+<h3 id="使用多线程"><a href="#使用多线程" class="headerlink" title="使用多线程"></a>使用多线程</h3><ul>
+<li>思路：定义一个当前数组的下标，每有一个线程获取到数组的一个当前下标的值，下标就+1；多个线程，循环同步访问数组的值，在线程内部做累加；利用CountDownLatch，使得所有线程执行完后，在对各个线程的算出的值做累加。</li>
 </ul>
-<p><img src="1543336152x2890174124.jpg" alt="图片失效"></p>
-<h2 id="HashMap的构造函数"><a href="#HashMap的构造函数" class="headerlink" title="HashMap的构造函数"></a>HashMap的构造函数</h2><ul>
-<li>HashMap有4种构造函数</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以默认的初始化大小16和负载因子0.75，构造对象</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constructs an empty &lt;tt&gt;HashMap&lt;/tt&gt; with the default initial capacity</span></span><br><span class="line"><span class="comment"> * (16) and the default load factor (0.75).</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR; <span class="comment">// all other fields defaulted</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指定初始化大小</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(initialCapacity, DEFAULT_LOAD_FACTOR);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指定容量大小和负载因子</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal initial capacity: "</span> +</span><br><span class="line">                                           initialCapacity);</span><br><span class="line">    <span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</span><br><span class="line">        initialCapacity = MAXIMUM_CAPACITY;</span><br><span class="line">    <span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal load factor: "</span> +</span><br><span class="line">                                           loadFactor);</span><br><span class="line">    <span class="keyword">this</span>.loadFactor = loadFactor;</span><br><span class="line">    <span class="keyword">this</span>.threshold = tableSizeFor(initialCapacity);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指定map</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(Map&lt;? extends K, ? extends V&gt; m)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR;</span><br><span class="line">    putMapEntries(m, <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在前三种构造器当中，没有为数组Entry<k,v> table分配内存空间，而是在执行put操作的时候才真正构建table数组；而第四种，指定了Map，构造器中调用putMapEntries(m, false);则会构建table数组。</k,v></p>
-<h2 id="HashMap-原理"><a href="#HashMap-原理" class="headerlink" title="HashMap 原理"></a>HashMap 原理</h2><p>基于Java1.6，在上面的基础信息中我们已经了解HashMap的结构，数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的.</p>
-<ol>
-<li>如果计算定位到的数组位置不含链表（当前entry的next指向null），那么对于查找、添加操作很快，仅需一次寻址即可，时间复杂度O(1);</li>
-<li>如果定位到的位置包含链表，对于添加操作，首先遍历链表，存在则覆盖，否则新增，其时间复杂度O(n);对于查找操作，仍需遍历链表，逐一对比key对象查找；</li>
-</ol>
-<p>所以，从性能考虑，HashMap中的链表出现越少，性能才会越好。<br><!-- end --></p>
-<font color="blue" face="楷体"><br>好好学习天天向上-分享、交流、共同进步~<br></font>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mutilThreadTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">    CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">long</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;indexs.length;j++)&#123;</span><br><span class="line">        <span class="keyword">new</span> TestThread(countDownLatch,j).start();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        countDownLatch.await();</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        System.out.println(<span class="string">"error == "</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; indexs.length; i++)&#123;</span><br><span class="line">        result += indexs[i];</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"result == "</span> + result);</span><br><span class="line">    System.out.println(<span class="string">"consume time : "</span> + (System.currentTimeMillis()-startTime));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果<br><br> result == 899943289<br><br> consume time : 10852 ms</p>
+</blockquote>
+<p>从执行结果看出，没用多线程执行的代码，消耗时间更短；</p>
+<p>多线程的使用为的是提高程序的执行效率，但是针对此题这样的多线程操作思路却并没有带来更高的效率，反而更慢了。多线程竞争数组、线程的同步等待，都使得性能更低了；换个思路，若将长数组进行预先分段，每个线程执行一个分段的累加，线程不在竞争而是直接执行，效率会更好（这部分思路的代码暂时不写咯~）</p>
+<!-- end -->
+<font color="blue" face="楷体"><br>好好学习天天向上~<br>分享、交流、共同进步~<br></font>
 
       
     </div>
@@ -418,7 +406,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java-Map-集合/" rel="tag"># Java | Map | 集合</a>
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
           
         </div>
       
@@ -431,15 +419,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/04/17/记一次内存泄漏问题/" rel="next" title="记一次内存泄漏问题">
+                <i class="fa fa-chevron-left"></i> 记一次内存泄漏问题
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/05/读读HashMap2/" rel="prev" title="读读HashMap(2)">
-                读读HashMap(2) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -582,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap基础结构"><span class="nav-number">1.</span> <span class="nav-text">HashMap基础结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap的基础属性"><span class="nav-number">1.1.</span> <span class="nav-text">HashMap的基础属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap的构造函数"><span class="nav-number">1.2.</span> <span class="nav-text">HashMap的构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-原理"><span class="nav-number">1.3.</span> <span class="nav-text">HashMap 原理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单元测试"><span class="nav-number">1.</span> <span class="nav-text">单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一般解法"><span class="nav-number">1.1.</span> <span class="nav-text">一般解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用多线程"><span class="nav-number">1.2.</span> <span class="nav-text">使用多线程</span></a></li></ol></li></ol></div>
             
 
           </div>
