@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tigutf.github.io/"/>
-  <updated>2019-05-16T16:59:07.000Z</updated>
+  <updated>2019-06-27T17:16:12.000Z</updated>
   <id>http://tigutf.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于微服务设计的面试题</title>
+    <link href="http://tigutf.github.io/2019/06/28/%E5%85%B3%E4%BA%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1%E8%AE%BE%E8%AE%A1%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>http://tigutf.github.io/2019/06/28/关于微服务设计的面试题/</id>
+    <published>2019-06-27T17:16:12.000Z</published>
+    <updated>2019-06-27T17:16:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天面试，面试官提到一个问题：项目中是否遇到过，多个接口服务中，我有的数据库操作已经提交了，但有个别接口出现异常，这时候针对我已提交的内容该怎处理？</p><p>头脑一热，这是一个分布式事务的问题，抓着数据库事务不放，回答得不尽人意；跳出数据库事务的局限，其实这就是集群服务中一致性的问题–I should have been able to answer better 😔<br><a id="more"></a></p><p>一心想着数据库事务，数据的提交和回滚，已提交更新的数据如何回滚回来，一时间想到的便是从备份的数据库中恢复回来（后面想想，恢复回滚的想法或许没错，但是从备份库恢复，一是无法确定从库是否已同步完成，二则是要恢复的切入点难以确定）。</p><p>面试官提示二段提交（看过，有点印象，却在当时忘记了该如何解释，郁闷~）</p><blockquote><p>　2PC，又叫做 XA Transactions；<br>XA 是一个两阶段提交协议，该协议分为以下两个阶段：<br>第一阶段：事务协调器要求每个涉及到事务的数据库预提交(precommit)此操作，并反映是否可以提交.<br>第二阶段：事务协调器要求每个数据库提交数据。</p></blockquote><p>按照此二阶段提交原理，若有一个中间的协调器广播监控各个服务接口事务的提交状态。判断所有节点是否已可以提交，从而使得所有事务在真正提交前保持一致。</p><p>数据存储功能，目前多种组件可以实现（缓存redis，消息中间件，zk的微服务中常用工具）。通过这些工具，让数据得以存储备份，而其中指针偏移offset的存在，也可以帮助我们定位数据事务走到了哪一步中。</p><p>CAP（一致性、可用性、分区容错性）<br>集群当中，分区容错性必然存在，那则是一致性和可用性的权衡取舍</p><p>BASE（Basically Available（基本可用）<br>Soft state（软状态）<br>Eventually consistent（最终一致性））</p><p>基于以上两种设计思想的对比，对于频繁被使用，并发高的服务，我们一般会选择AP组合，提高高可用，数据一致性我们则保证它最终的一个一致性。</p><p>（待续）</p><!-- end --><font color="blue" face="楷体"><br>好好学习天天向上~<br>分享、交流、共同进步~<br></font>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天面试，面试官提到一个问题：项目中是否遇到过，多个接口服务中，我有的数据库操作已经提交了，但有个别接口出现异常，这时候针对我已提交的内容该怎处理？&lt;/p&gt;
+&lt;p&gt;头脑一热，这是一个分布式事务的问题，抓着数据库事务不放，回答得不尽人意；跳出数据库事务的局限，其实这就是集群服务中一致性的问题–I should have been able to answer better 😔&lt;br&gt;
+    
+    </summary>
+    
+      <category term="微服务" scheme="http://tigutf.github.io/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+      <category term="CAP|" scheme="http://tigutf.github.io/tags/CAP/"/>
+    
+  </entry>
   
   <entry>
     <title>一道多线程练习题</title>
